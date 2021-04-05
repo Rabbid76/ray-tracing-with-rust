@@ -11,6 +11,12 @@ Implemented with [Rust Programming Language](https://www.rust-lang.org/), based 
 - ["Ray Tracing: the Next Week (Ray Tracing Minibooks Book 2)"](https://raytracing.github.io/books/RayTracingTheNextWeek.html)
 - ["Ray Tracing: The Rest of Your Life (Ray Tracing Minibooks Book 3)"](https://raytracing.github.io/books/RayTracingTheRestOfYourLife.html)
 
+Crates:
+
+- [Crate ray_tracing_core](https://docs.rs/ray_tracing_core/0.1.0/ray_tracing_core/)
+- [Crate ray_tracing_utility](https://docs.rs/ray_tracing_utility/0.1.0/ray_tracing_utility/)
+- [Crate ray_tracing_show_image](https://docs.rs/ray_tracing_show_image/0.1.0/ray_tracing_show_image/)
+
 ![cover scene - ray tracing 3](rendering/RoomGlassSphere_800x800_100000_samples.png)
 
 ## Ray Tracing in One Weekend
@@ -90,8 +96,6 @@ Cover scene "Ray Tracing: the Next Week"
 
 Recommended
 
-- [Crate ray_tracing_core](https://docs.rs/ray_tracing_core/0.1.0/ray_tracing_core/)
-- [Crate ray_tracing_utility](https://docs.rs/ray_tracing_utility/0.1.0/ray_tracing_utility/)
 - [PeterShirley/raytracing.github.io](https://github.com/RayTracing/raytracing.github.io)
 - [PeterShirley/RayTraycingInOneWeekend](https://github.com/RayTracing/InOneWeekend)
 - [PeterShirley/RayTraycingTheNextWeek](https://github.com/RayTracing/TheNextWeek)

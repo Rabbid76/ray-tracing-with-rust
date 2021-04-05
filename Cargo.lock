@@ -1619,7 +1619,7 @@ dependencies = [
 
 [[package]]
 name = "ray_tracing_core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "glm",
  "rand 0.8.3",
@@ -1637,7 +1637,7 @@ dependencies = [
 
 [[package]]
 name = "ray_tracing_show_image"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "ray_tracing_core",
  "ray_tracing_utility",
@@ -1646,7 +1646,7 @@ dependencies = [
 
 [[package]]
 name = "ray_tracing_utility"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "image",
  "ray_tracing_core",
