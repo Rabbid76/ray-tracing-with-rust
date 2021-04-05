@@ -1,0 +1,7 @@
+{
+  "cx": 800,
+  "cy": 400,
+  "repetitions_threads": 2,
+  "repetitions": 1000,
+  "samples": 10
+}

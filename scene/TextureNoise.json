@@ -1,0 +1,29 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 10, 
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [5.0, 4.0, 15.0],
+      "look_at": [-3.0, 0.0, -9.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 20.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 10.0,
+      "time_from": 0.0, "time_to": 0.0 } 
+    },    
+    { "Sky": { "id": 3, "nadir_color": [1.0, 1.0, 1.0], "zenith_color": [0.5, 0.7, 1.0] } },
+    { "ConstantTexture": { "id": 4, "color": [0.0, 0.0, 0.0] } },
+    { "ConstantTexture": { "id": 5, "color": [1.0, 1.0, 1.0] } },
+    { "NoiseTexture": { "id": 6, "scale": 1.0, "noise_type": "sin z", "min_texture": 4, "max_texture": 5 } },
+    { "Lambertian": { "id": 7, "albedo": 6 } },
+    { "Sphere": { "id": 8, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 7 } },
+    { "Sphere": { "id": 9, "center": [0.0, 2.0, 0.0], "radius": 2.0, "material": 7 } },
+    { "Collection": { "id": 10, "object_id_list": [8, 9] } }
+  ]
+}
+

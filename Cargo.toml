@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+    "ray_tracing_core",
+    "ray_tracing_utility",
+    "ray_tracing_show_image",
+    "ray_tracing_examples",
+]

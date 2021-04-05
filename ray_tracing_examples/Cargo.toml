@@ -1,0 +1,52 @@
+[package]
+name = "ray_tracing_examples"
+version = "0.1.0"
+authors = ["Rabbid76 <Gernot.Steinegger@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# https://docs.rs/opencv
+#opencv = {version = "0.49.1", features = ["buildtime-bindgen"]}
+
+show-image = "0.8.2"
+
+# How to use a local unpublished crate?
+# https://stackoverflow.com/questions/33025887/how-to-use-a-local-unpublished-crate
+ray_tracing_core = { path = "../ray_tracing_core" }
+ray_tracing_utility = { path = "../ray_tracing_utility" }
+ray_tracing_show_image = { path = "../ray_tracing_show_image" }
+
+[[bin]]
+name = "rt_test"
+path = "src/ray_tracing_test/main.rs"
+
+[[bin]]
+name = "rt_test_se"
+path = "src/ray_tracing_test_serialize/main.rs"
+
+[[bin]]
+name = "rt_test_dse"
+path = "src/ray_tracing_test_deserialize/main.rs"
+
+[[bin]]
+name = "rt_1"
+path = "src/ray_tracing_1/main.rs"
+
+[[bin]]
+name = "rt_2"
+path = "src/ray_tracing_2/main.rs"
+
+[[bin]]
+name = "rt_view"
+path = "src/ray_tracing_view/main.rs"
+
+[[bin]]
+name = "rt_load"
+path = "src/ray_tracing_load/main.rs"
+
+
+#[[bin]]
+#name = "rt_cv_test"
+#path = "src/ray_tracing_opencv_test/main.rs"

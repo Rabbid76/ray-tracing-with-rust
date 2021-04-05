@@ -1,0 +1,41 @@
+{
+    "configuration_id": 1,
+    "camera_id": 2, 
+    "sky_id": 3,
+    "root_node_id": 310, 
+    "light_node_id": 302,
+    "objects": [
+      { "Configuration": { "id": 1, "maximum_depth": 50 } },
+      { "CameraLookAt": { 
+        "id": 2, 
+        "look_from": [17.0, 20.0, 21.0],
+        "look_at": [0.0, 0.0, 0.0],
+        "vup": [0.0, 1.0, 0.0],
+        "v_fov": 30.0,
+        "aspect": 2.0,
+        "adepture": 0.0,
+        "focus_dist": 10.0,
+        "time_from": 0.0, "time_to": 0.0 } 
+      },    
+      { "Sky": { "id": 3,"nadir_color": 0.1, "zenith_color": 0.0} },
+      { "ConstantTexture": { "id": 101, "color": [0.8, 0.8, 0.8] } },
+      { "ConstantTexture": { "id": 102, "color": [0.4, 0.4, 0.4] } },
+      { "CheckerTexture": { "id": 103, "scale": [1.0, 1.0, 1.0], "even_texture": 101, "odd_texture": 102 } },
+      { "ConstantTexture": { "id": 107, "color": 1.0 } },
+      { "ConstantTexture": { "id": 108, "color": 1.0 } },
+      { "ConstantTexture": { "id": 109, "color": [4.0, 4.0, 4.0] } },
+      { "Lambertian": { "id": 201, "albedo": 103 } },
+      { "Dielectric": { "id": 202, "ref_idx": [1.2, 1.7], "albedo": 107 } },
+      { "Dielectric": { "id": 203, "ref_idx": [1.1, 1.9], "albedo": 108 } },
+      { "DiffuseLight": { "id": 204, "emit": 109 } },
+      { "Sphere": { "id": 301, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 201 } },
+      { "Sphere": { "id": 302, "center": [0.0, 5.0, -3.0], "radius": 1.0, "material": 204 } },  
+      { "Sphere": { "id": 303, "center": [-4.0, 2.0, 0.0], "radius": 1.9, "material": 202 } },
+      { "Sphere": { "id": 304, "center": [-4.0, 2.0, 0.0], "radius": 2.0, "material": 202 } }, 
+      { "Cuboid": { "id": 307, "min": [-1.5, 0.5, -1.5], "max": [1.5, 3.5, 1.5], "material": 203 } }, 
+      { "Sphere": { "id": 305, "center": [4.0, 2.0, 0.0], "radius": 1.9, "material": 203 } },
+      { "Sphere": { "id": 306, "center": [4.0, 2.0, 0.0], "radius": 2.0, "material": 203 } },    
+      { "Collection": { "id": 310, "object_id_list": [301, 302, 304, 306, 307] } }
+    ]
+  }
+  

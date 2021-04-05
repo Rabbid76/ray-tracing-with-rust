@@ -1,0 +1,38 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 4000, 
+  "light_node_id": 4001,
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [25.0, 4.0, 5.0],
+      "look_at": [0.0, 2.0, 0.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 20.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 10.0,
+      "time_from": 0.0, "time_to": 0.0 } 
+    },    
+    { "Sky": { "id": 3, "nadir_color": [0.0, 0.0, 0.0], "zenith_color": [0.0, 0.0, 0.0] } },
+    
+    { "ConstantTexture": { "id": 1000, "color": [0.0, 0.0, 0.0] } },
+    { "ConstantTexture": { "id": 1001, "color": [1.0, 1.0, 1.0] } },
+    { "NoiseTexture": { "id": 1002, "scale": 1.0, "noise_type": "sin z", "min_texture": 1000, "max_texture": 1001 } },
+    { "ConstantTexture": { "id": 1003, "color": [4.0, 4.0, 4.0] } },
+
+    { "Lambertian": { "id": 2000, "albedo": 1002 } },
+    { "DiffuseLight": { "id": 2001, "emit": 1003 } },
+    
+    { "Sphere": { "id": 3000, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 2000 } },
+    { "Sphere": { "id": 3001, "center": [0.0, 2.0, 0.0], "radius": 2.0, "material": 2000 } },
+    { "Sphere": { "id": 3002, "center": [0.0, 7.0, 0.0], "radius": 2.0, "material": 2001 } },
+    { "XYRect": { "id": 3003, "x0": 3.0, "y0": 1.0, "x1": 5.0, "y1": 3.0, "k": -2.0, "material": 2001 } },
+    
+    { "Collection": { "id": 4000, "object_id_list": [3000, 3001, 3002, 3003] } },
+    { "Collection": { "id": 4001, "object_id_list": [3002, 3003] } }
+  ]
+}

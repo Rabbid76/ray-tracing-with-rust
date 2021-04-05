@@ -1,0 +1,57 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 4000,
+  "light_node_id": 3017, 
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [278.0, 278.0, -800.0],
+      "look_at": [278.0, 278.0, 0.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 40.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 10.0,
+      "time_from": 0.0, "time_to": 0.0 } 
+    },    
+    { "Sky": { "id": 3, "nadir_color": [0.0, 0.0, 0.0], "zenith_color": [0.0, 0.0, 0.0] } },
+    
+    { "ConstantTexture": { "id": 1000, "color": [0.65, 0.05, 0.05] } },
+    { "ConstantTexture": { "id": 1001, "color": [0.73, 0.73, 0.73] } },
+    { "ConstantTexture": { "id": 1002, "color": [0.12, 0.45, 0.12] } },
+    { "ConstantTexture": { "id": 1003, "color": [15.0, 15.0, 15.0] } },
+    { "ConstantTexture": { "id": 1004, "color": [1.0, 1.0, 1.0] } },
+    { "ConstantTexture": { "id": 1005, "color": [0.0, 0.0, 0.0] } },
+
+    { "Lambertian": { "id": 2000, "albedo": 1000 } },
+    { "Lambertian": { "id": 2001, "albedo": 1001 } },
+    { "Lambertian": { "id": 2002, "albedo": 1002 } },
+    { "DiffuseLight": { "id": 2003, "emit": 1003 } },
+    { "Isotropic": { "id": 2004, "albedo": 1004 } },
+    { "Isotropic": { "id": 2005, "albedo": 1005 } },
+    
+    { "YZRect": { "id": 3000, "y0": 0.0, "z0": 0.0, "y1": 555.0, "z1": 555.0, "k": 555.0, "material": 2002 } },
+    { "FlipNormals": { "id": 3001, "node": 3000 } },
+    { "YZRect": { "id": 3002, "y0": 0.0, "z0": 0.0, "y1": 555.0, "z1": 555.0, "k": 0.0, "material": 2000 } },
+    { "XZRect": { "id": 3003, "x0": 213.0, "z0": 227.0, "x1": 343.0, "z1": 332.0, "k": 554.0, "material": 2003 } },
+    { "XZRect": { "id": 3004, "x0": 0.0, "z0": 0.0, "x1": 555.0, "z1": 555.0, "k": 555.0, "material": 2001 } },
+    { "FlipNormals": { "id": 3005, "node": 3004 } },
+    { "XZRect": { "id": 3006, "x0": 0.0, "z0": 0.0, "x1": 555.0, "z1": 555.0, "k": 0.0, "material": 2001 } },
+    { "XYRect": { "id": 3007, "x0": 0.0, "y0": 0.0, "x1": 555.0, "y1": 555.0, "k": 555.0, "material": 2001 } },
+    { "FlipNormals": { "id": 3008, "node": 3007 } },
+    { "Cuboid": { "id": 3009, "min": [0.0, 0.0, 0.0], "max": [165.0, 165.0, 165.0], "material": 2001 } },
+    { "RotateY": { "id": 3010, "angle": -18.0, "node": 3009 } },  
+    { "Translate": { "id": 3011, "offset": [130.0, 0.0, 65.0], "node": 3010 } },  
+    { "Cuboid": { "id": 3012, "min": [0.0, 0.0, 0.0], "max": [165.0, 330.0, 165.0], "material": 2001 } },
+    { "RotateY": { "id": 3013, "angle": 15.0, "node": 3012 } },  
+    { "Translate": { "id": 3014, "offset": [265.0, 0.0, 295.0], "node": 3013 } }, 
+    { "ConstantMedium": { "id": 3015, "density": 0.01, "boundary": 3011, "phase_function": 2004 } },    
+    { "ConstantMedium": { "id": 3016, "density": 0.01, "boundary": 3014, "phase_function": 2005 } },    
+    { "FlipNormals": { "id": 3017, "node": 3003 } },  
+    
+    { "Collection": { "id": 4000, "object_id_list": [3001, 3002, 3005, 3006, 3008, 3015, 3016, 3017] } }
+  ]
+}

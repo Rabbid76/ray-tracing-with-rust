@@ -1,0 +1,38 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 20, 
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [-1.05, 14.0, 4.1],
+      "look_at": [-0.05, 0.0, 0.1],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 40.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 1.0,
+      "time_from": 0.0, "time_to": 0.0 }
+     },    
+    { "Sky": { "id": 3, "nadir_color": [1.0, 1.0, 1.0], "zenith_color": [0.5, 0.7, 1.0] } },
+    { "ConstantTexture": { "id": 4, "color": [0.5, 0.5, 0.5] } },
+    { "Lambertian": { "id": 5, "albedo": 4 } },
+    { "Sphere": { "id": 6, "center": [0.0, -1000.5, 0.0], "radius": 1000.0, "material": 5 } },
+    { "ConstantTexture": { "id": 7, "color": [0.1, 0.2, 0.5] } },
+    { "Lambertian": { "id": 8, "albedo": 7 } },
+    { "Sphere": { "id": 9, "center": [-0.866, 0.0, -0.5], "radius": 0.5, "material": 8 } },
+    { "ConstantTexture": { "id": 10, "color": [1.0, 0.4, 0.2] } },
+    { "Metal": { "id": 11, "fuzz": 0.1, "albedo": 10 } },
+    { "Sphere": { "id": 12, "center": [0.866, 0.0, -0.5], "radius": 0.5, "material": 11 } },
+    { "ConstantTexture": { "id": 13, "color": 1.0 } },
+    { "Dielectric": { "id": 14, "ref_idx": 1.5, "albedo": 13 } },
+    { "Sphere": { "id": 15, "center": [0.0, 0.0, 1.0], "radius": 0.5, "material": 14 } },
+    { "Sphere": { "id": 16, "center": [0.0, 0.0, 1.0], "radius": -0.45, "material": 14 } },
+    { "MaterialBlend": { "id": 17, "weights": [1.0, 1.0, 1.0], "materials": [8, 11, 14] } },
+    { "Sphere": { "id": 18, "center": [0.0, 0.0, 0.0], "radius": 0.5, "material": 17 } },
+    { "Sphere": { "id": 19, "center": [0.0, 0.0, 0.0], "radius": -0.45, "material": 17 } },
+    { "Collection": { "id": 20, "object_id_list": [6, 9, 12, 15, 18, 19] } }  
+  ]
+}

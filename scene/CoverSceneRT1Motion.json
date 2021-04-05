@@ -1,0 +1,65 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 4000, 
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [12.0, 2.0, 3.0],
+      "look_at": [0.0, 0.0, 0.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 20.0,
+      "aspect": 2.0,
+      "adepture": 0.1,
+      "focus_dist": 10.0,
+      "time_from": 0.0, "time_to": 1.0 } 
+    },    
+    { "Sky": { "id": 3, "nadir_color": [1.0, 1.0, 1.0], "zenith_color": [0.5, 0.7, 1.0] } },
+
+    { "ConstantTexture": { "id": 99, "color": 1.0 } },
+    { "ConstantTexture": { "id": 100, "color": [0.2, 0.3, 0.1] } },
+    { "ConstantTexture": { "id": 101, "color": [0.9, 0.9, 0.9] } },
+    { "CheckerTexture": { "id": 102, "scale": [10.0, 10.0, 10.0], "even_texture": 100, "odd_texture": 101 } },
+    { "Lambertian": { "id": 103, "albedo": 102 } },
+    { "Sphere": { "id": 104, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 103 } },
+
+    { "Dielectric": { "id": 110, "ref_idx": 1.5, "albedo": 99 } },
+    { "Sphere": { "id": 111, "center": [0.0, 1.0, 0.0], "radius": 1.0, "material": 110 } },
+    { "ConstantTexture": { "id": 112, "color": [0.4, 0.2, 0.1] } },
+    { "Lambertian": { "id": 113, "albedo": 112 } },
+    { "Sphere": { "id": 114, "center": [-4.0, 1.0, 0.0], "radius": 1.0, "material": 113 } },
+    { "ConstantTexture": { "id": 115, "color": [0.7, 0.6, 0.5] } },
+    { "Metal": { "id": 116, "fuzz": 0.1, "albedo": 115 } },
+    { "Sphere": { "id": 117, "center": [4.0, 1.0, 0.0], "radius": 1.0, "material": 116 } },
+    
+    { "ConstantTexture": { "id": [1000, 1320], "color": { "RandomVector3": [[0.0, 1.0], [0.0, 1.0], [0.0, 1.0]] } } },
+    { "ConstantTexture": { "id": [1320, 1360], "color": { "RandomVector3": [[0.5, 1.0], [0.5, 1.0], [0.5, 1.0]] } } },
+    { "Lambertian": { "id": [2000, 2320], "albedo": [1000, 1320] } },
+    { "Metal": { "id": [2320, 2360], "fuzz": { "RandomScalar": [0.5, 1.0] }, "albedo": [1320, 1360] } },
+    { "MovableSphere": { 
+        "id": [3000, 3320], 
+        "center0": { "RandomVector3": [[-10.0, 10.0], [0.2, 0.2], [-10.0, 10.0]] },
+        "center1": { "RandomVector3": [[-10.0, 10.0], [0.2, 0.7], [-10.0, 10.0]] },
+        "time0": 0.0,
+        "time1": 1.0, 
+        "radius": 0.2, 
+        "material": [2000, 2320] }
+    },
+    { "Sphere": { 
+        "id": [3320, 3360], 
+        "center": { "RandomVector3": [[-5.0, 5.0], [0.2, 0.2], [-10.0, 10.0]] },
+        "radius": 0.2, 
+        "material": [2320, 2360] }
+    },
+    { "Sphere": { 
+        "id": [3360, 3400], 
+        "center": { "RandomVector3": [[-5.0, 5.0], [0.2, 0.2], [-10.0, 10.0]] },
+        "radius": 0.2, 
+        "material": 110 } 
+    },
+
+    { "Collection": { "id": 4000, "object_id_list": [104, 111, 114, 117, [3000, 3400]] } }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 6, 
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [13.0, 2.0, 3.0],
+      "look_at": [0.0, 0.0, 0.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 20.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 10.0,
+      "time_from": 0.0, "time_to": 0.0 } 
+    },    
+    { "Sky": { "id": 3, "nadir_color": [1.0, 1.0, 1.0], "zenith_color": [0.0, 0.0, 0.0] } },
+    { "BitmapFile": { "id": 4, "filename": "../resource/texture/physical-free-world-map-b1.jpg" } },
+    { "Lambertian": { "id": 5, "albedo": 4 } },
+    { "Sphere": { "id": 6, "center": [0.0, 0.0, 0.0], "radius": 2.0, "material": 5 } }
+  ]
+}
