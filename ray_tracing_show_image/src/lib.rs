@@ -3,8 +3,6 @@
 //! GitHub page [rabbid76.github.io/ray-tracing-with-rust](https://rabbid76.github.io/ray-tracing-with-rust/)  
 //! GitHub repository [Rabbid76/ray-tracing-with-rust](https://github.com/Rabbid76/ray-tracing-with-rust)
 //! 
-//! [![](https://stackexchange.com/users/flair/7322082.png)](https://stackoverflow.com/users/5577765/rabbid76?tab=profile)
-//! 
 //! A very simple viewer of ray tracing progress
 //! 
 //! Shows the ray tracing progress in a window. The window is updated every second.

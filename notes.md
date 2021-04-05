@@ -50,6 +50,7 @@ The CSG rendering library [http://www.opencsg.org/]
 - Ray marching bodies
 - AND, OR, MINUS
 - 2 Sight, 3 sight body
+- curvature of triangle projected on a sphere
 
 ## Ask Stack Overflow Questions
 
