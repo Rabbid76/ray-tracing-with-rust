@@ -1641,7 +1641,7 @@ version = "0.1.0"
 dependencies = [
  "ray_tracing_core 0.1.0",
  "ray_tracing_show_image",
- "ray_tracing_utility",
+ "ray_tracing_utility 0.1.0",
  "show-image",
 ]
 
@@ -1649,14 +1649,26 @@ dependencies = [
 name = "ray_tracing_show_image"
 version = "0.1.0"
 dependencies = [
- "ray_tracing_core 0.1.0",
- "ray_tracing_utility",
+ "ray_tracing_core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ray_tracing_utility 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "show-image",
 ]
 
 [[package]]
 name = "ray_tracing_utility"
 version = "0.1.0"
+dependencies = [
+ "image",
+ "ray_tracing_core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "ray_tracing_utility"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c46ce73b6bb6d0442eea27092af6b6e6fd4d46d1d9bda9b1c97fdfabc305a666"
 dependencies = [
  "image",
  "ray_tracing_core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
