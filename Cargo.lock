@@ -1626,10 +1626,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "ray_tracing_core"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72ae7e9ab9af0290dd639eb6c1fffa6dd436f3b3dc7c6ac8ffb107eb9f59bfa3"
+dependencies = [
+ "glm",
+ "rand 0.8.3",
+]
+
+[[package]]
 name = "ray_tracing_examples"
 version = "0.1.0"
 dependencies = [
- "ray_tracing_core",
+ "ray_tracing_core 0.1.0",
  "ray_tracing_show_image",
  "ray_tracing_utility",
  "show-image",
@@ -1639,7 +1649,7 @@ dependencies = [
 name = "ray_tracing_show_image"
 version = "0.1.0"
 dependencies = [
- "ray_tracing_core",
+ "ray_tracing_core 0.1.0",
  "ray_tracing_utility",
  "show-image",
 ]
@@ -1649,7 +1659,7 @@ name = "ray_tracing_utility"
 version = "0.1.0"
 dependencies = [
  "image",
- "ray_tracing_core",
+ "ray_tracing_core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
  "serde_json",
 ]
@@ -1820,9 +1830,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.63"
+version = "1.0.64"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "43535db9747a4ba938c0ce0a98cc631a46ebf943c9e1d604e091df6007620bf6"
+checksum = "799e97dc9fdae36a5c8b8f2cae9ce2ee9fdce2058c57a93e6099d919fd982f79"
 dependencies = [
  "itoa",
  "ryu",
