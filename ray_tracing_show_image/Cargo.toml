@@ -9,7 +9,7 @@ license = "MIT OR Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-show-image = "0.8.1"
+show-image = "0.9.4"
 
 # How to use a local unpublished crate?
 # https://stackoverflow.com/questions/33025887/how-to-use-a-local-unpublished-crate

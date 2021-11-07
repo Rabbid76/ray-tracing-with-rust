@@ -10,7 +10,7 @@ edition = "2018"
 # https://docs.rs/opencv
 #opencv = {version = "0.49.1", features = ["buildtime-bindgen"]}
 
-show-image = "0.8.2"
+show-image = "0.9.4"
 
 # How to use a local unpublished crate?
 # https://stackoverflow.com/questions/33025887/how-to-use-a-local-unpublished-crate

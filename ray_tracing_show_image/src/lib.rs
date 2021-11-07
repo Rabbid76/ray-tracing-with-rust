@@ -77,7 +77,9 @@ impl ShowImageWindow {
             size: Some([cx as u32, cy as u32]),
             resizable: false,
             borderless: false,
-            show_overlays: false,
+            overlays_visible: false,
+            default_controls: false,
+
         };
         let window = show_image::create_window("ray trace", window_options).unwrap();
         let event_channel = Rc::new(window.event_channel().unwrap());
