@@ -1,10 +1,10 @@
 use crate::serialization::core::{Camera, Configuration};
 use crate::serialization::environment::SerializeEnvironment;
-use crate::serialization::hit_able::SerializeHitAble;
+use crate::serialization::geometry::SerializeGeometry;
 use crate::serialization::{IdConstructor, IdReference, RayTracingObject};
 use ray_tracing_core::core;
 use ray_tracing_core::environment;
-use ray_tracing_core::hit_able;
+use ray_tracing_core::geometry;
 use ray_tracing_core::material;
 use ray_tracing_core::texture;
 use serde::{Deserialize, Serialize};
@@ -69,7 +69,7 @@ impl Scene {
             object_map: object_map.clone(),
         };
         s.sky.accept(&mut se)?;
-        let mut sh = SerializeHitAble {
+        let mut sh = SerializeGeometry {
             object_map: object_map.clone(),
             collection: None,
         };
@@ -123,13 +123,13 @@ impl Scene {
         }
     }
 
-    pub fn insert_hit_able<T, F>(
-        container: &mut HashMap<usize, Arc<dyn hit_able::HitAble>>,
+    pub fn insert_geometry<T, F>(
+        container: &mut HashMap<usize, Arc<dyn geometry::Geometry>>,
         id: &IdConstructor,
         object: &T,
         convert: F,
     ) where
-        F: Fn(&T, usize, &HashMap<usize, Arc<dyn hit_able::HitAble>>) -> Arc<dyn hit_able::HitAble>,
+        F: Fn(&T, usize, &HashMap<usize, Arc<dyn geometry::Geometry>>) -> Arc<dyn geometry::Geometry>,
     {
         for index in 0..id.len() {
             container.insert(id.get_id(index), convert(object, index, container));
@@ -285,11 +285,11 @@ impl Scene {
                 _ => (),
             }
         }
-        let mut object_map = HashMap::<usize, Arc<dyn hit_able::HitAble>>::default();
+        let mut object_map = HashMap::<usize, Arc<dyn geometry::Geometry>>::default();
         for obj in self.objects.iter() {
             match obj {
                 RayTracingObject::Sphere(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, _| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, _| {
                         Arc::new(
                             h.to_shape(i, Scene::get_material(&material_map, &h.material, i))
                                 .unwrap(),
@@ -297,7 +297,7 @@ impl Scene {
                     })
                 }
                 RayTracingObject::MovableSphere(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, _| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, _| {
                         Arc::new(
                             h.to_shape(i, Scene::get_material(&material_map, &h.material, i))
                                 .unwrap(),
@@ -305,20 +305,20 @@ impl Scene {
                     })
                 }
                 RayTracingObject::Collection(c) => {
-                    let mut obj_list = Vec::<Arc<dyn hit_able::HitAble>>::default();
+                    let mut obj_list = Vec::<Arc<dyn geometry::Geometry>>::default();
                     for id in IdReference::get_list(&c.object_id_list) {
-                        obj_list.push(Scene::get_hit_able(
+                        obj_list.push(Scene::get_geometry(
                             &object_map,
                             &IdReference::Single(id),
                             0,
                         ));
                     }
-                    Scene::insert_hit_able(&mut object_map, &c.id, c, |c, _, _| {
+                    Scene::insert_geometry(&mut object_map, &c.id, c, |c, _, _| {
                         c.to_collection(&obj_list, 0.0..0.0).unwrap()
                     })
                 }
                 RayTracingObject::XYRect(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, _| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, _| {
                         Arc::new(
                             h.to_shape(i, Scene::get_material(&material_map, &h.material, i))
                                 .unwrap(),
@@ -326,7 +326,7 @@ impl Scene {
                     })
                 }
                 RayTracingObject::XZRect(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, _| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, _| {
                         Arc::new(
                             h.to_shape(i, Scene::get_material(&material_map, &h.material, i))
                                 .unwrap(),
@@ -334,7 +334,7 @@ impl Scene {
                     })
                 }
                 RayTracingObject::YZRect(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, _| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, _| {
                         Arc::new(
                             h.to_shape(i, Scene::get_material(&material_map, &h.material, i))
                                 .unwrap(),
@@ -342,7 +342,7 @@ impl Scene {
                     })
                 }
                 RayTracingObject::Cuboid(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, _| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, _| {
                         Arc::new(
                             h.to_shape(i, Scene::get_material(&material_map, &h.material, i))
                                 .unwrap(),
@@ -350,11 +350,11 @@ impl Scene {
                     })
                 }
                 RayTracingObject::ConstantMedium(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, om| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, om| {
                         Arc::new(
                             h.to_volume(
                                 i,
-                                Scene::get_hit_able(&om, &h.boundary, i),
+                                Scene::get_geometry(&om, &h.boundary, i),
                                 Scene::get_material(&material_map, &h.phase_function, i),
                             )
                             .unwrap(),
@@ -362,41 +362,41 @@ impl Scene {
                     })
                 }
                 RayTracingObject::FlipNormals(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, om| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, om| {
                         Arc::new(
-                            h.to_hit_able(i, Scene::get_hit_able(&om, &h.node, i))
+                            h.to_geometry(i, Scene::get_geometry(&om, &h.node, i))
                                 .unwrap(),
                         )
                     })
                 }
                 RayTracingObject::RotateX(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, om| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, om| {
                         Arc::new(
-                            h.to_hit_able(i, Scene::get_hit_able(&om, &h.node, i))
+                            h.to_geometry(i, Scene::get_geometry(&om, &h.node, i))
                                 .unwrap(),
                         )
                     })
                 }
                 RayTracingObject::RotateY(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, om| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, om| {
                         Arc::new(
-                            h.to_hit_able(i, Scene::get_hit_able(&om, &h.node, i))
+                            h.to_geometry(i, Scene::get_geometry(&om, &h.node, i))
                                 .unwrap(),
                         )
                     })
                 }
                 RayTracingObject::RotateZ(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, om| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, om| {
                         Arc::new(
-                            h.to_hit_able(i, Scene::get_hit_able(&om, &h.node, i))
+                            h.to_geometry(i, Scene::get_geometry(&om, &h.node, i))
                                 .unwrap(),
                         )
                     })
                 }
                 RayTracingObject::Translate(h) => {
-                    Scene::insert_hit_able(&mut object_map, &h.id, h, |h, i, om| {
+                    Scene::insert_geometry(&mut object_map, &h.id, h, |h, i, om| {
                         Arc::new(
-                            h.to_hit_able(i, Scene::get_hit_able(&om, &h.node, i))
+                            h.to_geometry(i, Scene::get_geometry(&om, &h.node, i))
                                 .unwrap(),
                         )
                     })
@@ -405,7 +405,7 @@ impl Scene {
             };
         }
         let light = if self.light_node_id > 0 {
-            Some(Scene::get_hit_able(
+            Some(Scene::get_geometry(
                 &object_map,
                 &IdReference::Single(self.light_node_id),
                 0,
@@ -417,7 +417,7 @@ impl Scene {
             Scene::get_configuration(&configuration_map, &self.configuration_id),
             Scene::get_camera(&camera_map, &self.camera_id),
             Scene::get_environment(&environment_map, &self.sky_id),
-            Scene::get_hit_able(&object_map, &IdReference::Single(self.root_node_id), 0),
+            Scene::get_geometry(&object_map, &IdReference::Single(self.root_node_id), 0),
             light,
         ))
     }
@@ -473,11 +473,11 @@ impl Scene {
         material_map[&id].clone()
     }
 
-    fn get_hit_able(
-        object_map: &HashMap<usize, Arc<dyn hit_able::HitAble>>,
+    fn get_geometry(
+        object_map: &HashMap<usize, Arc<dyn geometry::Geometry>>,
         id: &IdReference,
         index: usize,
-    ) -> Arc<dyn hit_able::HitAble> {
+    ) -> Arc<dyn geometry::Geometry> {
         let id = id.get_id(index);
         if !object_map.contains_key(&id) {
             panic!("No hit able object with id {} found", id);

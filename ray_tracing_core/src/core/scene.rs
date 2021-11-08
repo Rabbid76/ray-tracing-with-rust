@@ -1,8 +1,8 @@
 use crate::core::{Camera, Configuration};
 use crate::environment::Environment;
-use crate::hit_able::HitAble;
+use crate::geometry::Geometry;
 use crate::math::Ray;
-use crate::probability_density_function::{HitAblePdf, MixturePdf, ProbabilityDensityFunction};
+use crate::probability_density_function::{GeometryPdf, MixturePdf, ProbabilityDensityFunction};
 use crate::types::{ColorRGB, FSize};
 use std::error::Error;
 use std::sync::Arc;
@@ -11,8 +11,8 @@ pub struct Scene {
     pub configuration: Configuration,
     pub camera: Arc<Camera>,
     pub sky: Arc<dyn Environment>,
-    pub world: Arc<dyn HitAble>,
-    pub light: Option<Arc<dyn HitAble>>,
+    pub world: Arc<dyn Geometry>,
+    pub light: Option<Arc<dyn Geometry>>,
 }
 
 impl Scene {
@@ -20,8 +20,8 @@ impl Scene {
         configuration: Configuration,
         camera: Arc<Camera>,
         sky: Arc<dyn Environment>,
-        world: Arc<dyn HitAble>,
-        light: Option<Arc<dyn HitAble>>,
+        world: Arc<dyn Geometry>,
+        light: Option<Arc<dyn Geometry>>,
     ) -> Scene {
         Scene {
             configuration,
@@ -45,7 +45,7 @@ impl Scene {
         &self,
         u: FSize,
         v: FSize,
-        light_shape: Option<Arc<dyn HitAble>>,
+        light_shape: Option<Arc<dyn Geometry>>,
     ) -> ColorRGB {
         let mut ray = self.camera.get(u, v);
         let mut color = ColorRGB::new(0.0, 0.0, 0.0);
@@ -65,7 +65,7 @@ impl Scene {
                                 Some(pdf) => match light_shape {
                                     Some(ref light_shape) => Some(Arc::new(MixturePdf::new(
                                         pdf.clone(),
-                                        Arc::new(HitAblePdf::new(
+                                        Arc::new(GeometryPdf::new(
                                             &hit_record.position,
                                             light_shape.clone(),
                                         )),

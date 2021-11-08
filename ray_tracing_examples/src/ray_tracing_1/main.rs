@@ -1,8 +1,8 @@
 use ray_tracing_core::core::{Camera, Configuration, Scene};
 use ray_tracing_core::environment::Sky;
-use ray_tracing_core::hit_able::collection::BVHNode;
-use ray_tracing_core::hit_able::shape::{MovableSphere, Sphere};
-use ray_tracing_core::hit_able::HitAble;
+use ray_tracing_core::geometry::collection::BVHNode;
+use ray_tracing_core::geometry::shape::{MovableSphere, Sphere};
+use ray_tracing_core::geometry::Geometry;
 use ray_tracing_core::material::{Dielectric, Lambertian, Material, Metal};
 use ray_tracing_core::random;
 use ray_tracing_core::texture::{CheckerTexture, ConstantTexture};
@@ -50,7 +50,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         view_model.repetitions * view_model.samples
     );
 
-    let mut object_vec = Vec::<Arc<dyn HitAble>>::default();
+    let mut object_vec = Vec::<Arc<dyn Geometry>>::default();
 
     object_vec.push(Arc::new(Sphere::new(
         Point3::new(0.0, -1000.0, 0.0),

@@ -30,7 +30,7 @@ The CSG rendering library [http://www.opencsg.org/]
 ### Deserializer
 
 - Abstract the deserialization of child nodes, interface segregation
-- Make it extendable for customer. Add `CustomerTexture`, `CustomerMaterial`, `CustomerHitAble` and `CustomerEnvironment`. The input to the deserialization methods should be a dictionary (`HashMap`). The deserialization classes should be registerable for the general case and for special cases depending on a type property.
+- Make it extendable for customer. Add `CustomerTexture`, `CustomerMaterial`, `CustomerGeometry` and `CustomerEnvironment`. The input to the deserialization methods should be a dictionary (`HashMap`). The deserialization classes should be registerable for the general case and for special cases depending on a type property.
 
 ### Texture
 
@@ -58,10 +58,10 @@ The CSG rendering library [http://www.opencsg.org/]
 
 ```rust
 pub sturct BVHNode {
-    pub left: Arc<dyn HitAble>,
-    pub right: Arc<syn HitAble> 
+    pub left: Arc<dyn Geometry>,
+    pub right: Arc<syn Geometry> 
 }
 
-impl HitAble for BVHNode {}
+impl Geometry for BVHNode {}
 ```
 

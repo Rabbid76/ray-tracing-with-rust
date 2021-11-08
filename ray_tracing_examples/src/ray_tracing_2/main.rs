@@ -1,10 +1,10 @@
 use ray_tracing_core::core::{Camera, Configuration, Scene};
 use ray_tracing_core::environment::Sky;
-use ray_tracing_core::hit_able::collection::{BVHNode, HitAbleList};
-use ray_tracing_core::hit_able::instancing::{FlipNormals, RotateY, Translate};
-use ray_tracing_core::hit_able::shape::{Cuboid, MovableSphere, Sphere, XZRect};
-use ray_tracing_core::hit_able::volume::ConstantMedium;
-use ray_tracing_core::hit_able::HitAble;
+use ray_tracing_core::geometry::collection::{BVHNode, GeometryList};
+use ray_tracing_core::geometry::instancing::{FlipNormals, RotateY, Translate};
+use ray_tracing_core::geometry::shape::{Cuboid, MovableSphere, Sphere, XZRect};
+use ray_tracing_core::geometry::volume::ConstantMedium;
+use ray_tracing_core::geometry::Geometry;
 use ray_tracing_core::material::{Dielectric, DiffuseLight, Isotropic, Lambertian, Metal};
 use ray_tracing_core::random;
 use ray_tracing_core::texture::{ConstantTexture, NoiseTexture, NoiseType};
@@ -47,9 +47,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         view_model.repetitions * view_model.samples
     );
 
-    let mut object_vec = Vec::<Arc<dyn HitAble>>::default();
+    let mut object_vec = Vec::<Arc<dyn Geometry>>::default();
 
-    let mut list_1 = Vec::<Arc<dyn HitAble>>::default();
+    let mut list_1 = Vec::<Arc<dyn Geometry>>::default();
     for i in 0..20 {
         for j in 0..20 {
             let v_min = Vector3::new(
@@ -72,7 +72,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
     object_vec.push(BVHNode::new(&list_1, 0.0..1.0));
 
-    let mut list_2 = Vec::<Arc<dyn HitAble>>::default();
+    let mut list_2 = Vec::<Arc<dyn Geometry>>::default();
     for _ in 0..1000 {
         list_2.push(Arc::new(Sphere::new(
             Vector3::new(
@@ -185,7 +185,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         )))),
     )));
 
-    let lights: Vec<Arc<dyn HitAble>> = vec![light_node, glass_sphere_node];
+    let lights: Vec<Arc<dyn Geometry>> = vec![light_node, glass_sphere_node];
     let scene = Scene::new(
         Configuration::default(),
         Arc::new(Camera::from_look_at(
@@ -203,7 +203,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             ColorRGB::new(0.0, 0.0, 0.0),
         )),
         BVHNode::new(&object_vec, 0.0..1.0),
-        Some(Arc::new(HitAbleList::new(&lights))),
+        Some(Arc::new(GeometryList::new(&lights))),
     );
 
     let window = ray_tracing_show_image::ShowImageWindow::new(view_model.cx, view_model.cy);

@@ -1,7 +1,7 @@
 use crate::core::{Camera, Configuration, Scene};
 use crate::environment::Sky;
-use crate::hit_able::collection::BVHNode;
-use crate::hit_able::shape::Sphere;
+use crate::geometry::collection::BVHNode;
+use crate::geometry::shape::Sphere;
 use crate::material::Lambertian;
 use crate::texture::ConstantTexture;
 use crate::types::{ColorRGB, ColorRGBA, Point3, Vector3};

@@ -1,9 +1,9 @@
 use self::core::*;
 use self::environment::Sky;
-use self::hit_able::collection::Collection;
-use self::hit_able::instancing::*;
-use self::hit_able::shape::*;
-use self::hit_able::volume::*;
+use self::geometry::collection::Collection;
+use self::geometry::instancing::*;
+use self::geometry::shape::*;
+use self::geometry::volume::*;
 use self::material::*;
 use self::texture::*;
 use ray_tracing_core::random;
@@ -21,7 +21,7 @@ pub mod texture;
 pub mod material;
 
 /// Serialization of ray tracing hit ables
-pub mod hit_able;
+pub mod geometry;
 
 /// Serialization of environment like sky
 pub mod environment;

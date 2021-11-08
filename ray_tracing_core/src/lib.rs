@@ -81,7 +81,7 @@ pub mod material;
 /// Hit able objects
 ///
 /// Implementation of ray tracing hit ables
-pub mod hit_able;
+pub mod geometry;
 
 /// Environment
 ///
