@@ -12,7 +12,7 @@ use std::sync::Arc;
 use std::time::SystemTime;
 
 /// ```lang-none
-/// cargo run --bin rt_load scene/TestSceneSimple.json scene/TestConfiguration.json
+/// cargo run --bin rt_load ./scene/TestSceneSimple.json ./scene/TestConfiguration.json
 /// ```
 #[show_image::main]
 fn main() -> Result<(), Box<dyn Error>> {
