@@ -38,7 +38,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         None => default_view_model,
     };
     let scene_name = "CoverSceneRT2";
-    let target_root = "c:/temp";
+    let target_root = "./temp";
     let target_file_name = format!(
         "{}_{}x{}_{}_samples",
         scene_name,

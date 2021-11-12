@@ -31,6 +31,6 @@ fn main() {
         pixel_data[i * 4 + 3] = 255;
     }
 
-    let file_name = "c:/temp/rt_test.png";
+    let file_name = "./temp/rt_test.png";
     image::save_image(file_name, cx, cy, &pixel_data);
 }

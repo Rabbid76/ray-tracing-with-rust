@@ -46,7 +46,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         None => (),
     }
     let file_name = Path::new(&file_path).file_stem().unwrap().to_str().unwrap();
-    let target_root = "c:/temp";
+    let target_root = "./temp";
     let target_file_name = format!(
         "{}_{}x{}_{}_samples",
         file_name,

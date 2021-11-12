@@ -22,7 +22,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         Arc::new(TestSceneSimple::new().scene),
         window.clone(),
         Box::new(|image_number, cx, cy, data| {
-            let mut file_name = "c:/temp/test_".to_owned();
+            let mut file_name = "./temp/test_".to_owned();
             file_name.push_str(&image_number.to_string());
             file_name.push_str(".png");
             image::save_image(&file_name, cx, cy, data);
