@@ -8,8 +8,8 @@
     { "Configuration": { "id": 1, "maximum_depth": 50 } },
     { "CameraLookAt": { 
       "id": 2, 
-      "look_from": [-1.05, 14.0, 4.1],
-      "look_at": [-0.05, 0.0, 0.1],
+      "look_from": [-1.12, 14.0, 4.17],
+      "look_at": [-0.12, 0.0, 0.17],
       "vup": [0.0, 1.0, 0.0],
       "v_fov": 40.0,
       "aspect": 2.0,

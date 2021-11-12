@@ -8,8 +8,8 @@
     { "Configuration": { "id": 1, "maximum_depth": 50 } },
     { "CameraLookAt": { 
       "id": 2, 
-      "look_from": [-1.05, 14.0, 4.1],
-      "look_at": [-0.05, 0.0, 0.1],
+      "look_from": [-1.12, 14.0, 4.17],
+      "look_at": [-0.12, 0.0, 0.17],
       "vup": [0.0, 1.0, 0.0],
       "v_fov": 40.0,
       "aspect": 2.0,
@@ -33,12 +33,9 @@
     { "ConstantTexture": { "id": 112, "color": [0.4, 0.4, 0.4] } },
     { "CheckerTexture": { "id": 113, "scale": [4.0, 4.0, 4.0], "even_texture": 111, "odd_texture": 112 } }, 
     { "ConstantTexture": { "id": 114, "color": [4.0, 4.0, 4.0] } },       
-    { "ConstantTexture": { "id": 115, "color": [1.0, 1.0, 1.0] } },
-    { "ConstantTexture": { "id": 116, "color": [1.0, 1.0, 1.0] } },
     
     { "DiffuseLight": { "id": 201, "emit": 114 } },
-    { "Isotropic": { "id": 202, "albedo": 115 } },
-
+    
     { "Lambertian": { "id": 401, "albedo": 113 } },  
     { "Lambertian": { "id": 402, "albedo": 102 } },  
     { "Metal": { "id": 403, "fuzz": 0.1, "albedo": 103 } },  
@@ -52,7 +49,6 @@
     { "Metal": { "id": 411, "fuzz": 0.5, "albedo": 109 } },
     { "MaterialBlend": { "id": 412, "weights": [4.0, 1.0], "materials": [410, 411] } },   
     { "Dielectric": { "id": 413, "ref_idx": 1.5, "albedo": 101 } }, 
-    { "Lambertian": { "id": 414, "albedo": 116 } },
     
     { "Sphere": { "id": 501, "center": [0.0, -1000.5, 0.0], "radius": 1000.0, "material": 401 } },
     { "Sphere": { "id": 502, "center": [0.866, 0.0, -0.5], "radius": 0.5, "material": 403 } },  
@@ -65,10 +61,7 @@
     { "Sphere": { "id": 509, "center": [0.866, 0.0, 0.5], "radius": 0.5, "material": 409 } }, 
     { "Sphere": { "id": 510, "center": [-0.866, 0.0, 0.5], "radius": 0.5, "material": 412 } },  
     { "Sphere": { "id": 511, "center": [4.0, 3.0, 1.0], "radius": 1.0, "material": 201 } },   
-    { "Sphere": { "id": 512, "center": [0.0, -1000.5, 0.0], "radius": 1000.5, "material": 414 } },  
-    
-    { "ConstantMedium": { "id": 601, "density": 0.9, "boundary": 512, "phase_function": 202 } },         
- 
+     
     { "Collection": { "id": 1001, "object_id_list": [501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511] } },  
     { "Collection": { "id": 1002, "object_id_list": [511] } }  
   ]
