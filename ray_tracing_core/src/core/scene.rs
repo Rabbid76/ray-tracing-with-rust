@@ -89,7 +89,7 @@ impl Scene {
                                 let pdf_value = pdf.value(&scattered.direction);
                                 attenuation =
                                     attenuation * scatter_record.attenuation * s_pdf / pdf_value;
-                                ray = scatter_record.ray;
+                                ray = scattered;
                             }
                             None => {
                                 let s_pdf = scatter_record.material.scattering_pdf(
