@@ -69,7 +69,7 @@
     
     { "ConstantMedium": { "id": 601, "density": 0.9, "boundary": 512, "phase_function": 202 } },         
  
-    { "Collection": { "id": 1001, "object_id_list": [501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511] } },  
+    { "Collection": { "id": 1001, "object_id_list": [501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 601] } },  
     { "Collection": { "id": 1002, "object_id_list": [511] } }  
   ]
 }
