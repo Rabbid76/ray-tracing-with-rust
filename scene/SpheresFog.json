@@ -58,9 +58,9 @@
     { "Sphere": { "id": 502, "center": [0.866, 0.0, -0.5], "radius": 0.5, "material": 403 } },  
     { "Sphere": { "id": 503, "center": [-0.866, 0.0, -0.5], "radius": 0.5, "material": 402 } },
     { "Sphere": { "id": 504, "center": [0.0, 0.0, 1.0], "radius": 0.5, "material": 413 } },
-    { "Sphere": { "id": 505, "center": [0.0, 0.0, 1.0], "radius": -0.45, "material": 404 } },
+    { "Sphere": { "id": 505, "center": [0.0, 0.0, 1.0], "radius": -0.4, "material": 404 } },
     { "Sphere": { "id": 506, "center": [0.0, 0.0, 0.0], "radius": 0.5, "material": 405 } },
-    { "Sphere": { "id": 507, "center": [0.0, 0.0, 0.0], "radius": -0.45, "material": 405 } },
+    { "Sphere": { "id": 507, "center": [0.0, 0.0, 0.0], "radius": -0.4, "material": 405 } },
     { "Sphere": { "id": 508, "center": [0.866, 0.0, 0.5], "radius": 0.49, "material": 408 } },
     { "Sphere": { "id": 509, "center": [0.866, 0.0, 0.5], "radius": 0.5, "material": 409 } }, 
     { "Sphere": { "id": 510, "center": [-0.866, 0.0, 0.5], "radius": 0.5, "material": 412 } },  
@@ -69,7 +69,7 @@
     
     { "ConstantMedium": { "id": 601, "density": 0.9, "boundary": 512, "phase_function": 202 } },         
  
-    { "Collection": { "id": 1001, "object_id_list": [501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 601] } },  
+    { "Collection": { "id": 1001, "object_id_list": [501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511] } },  
     { "Collection": { "id": 1002, "object_id_list": [511] } }  
   ]
 }
