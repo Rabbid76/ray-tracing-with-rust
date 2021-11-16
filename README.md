@@ -92,6 +92,12 @@ Cover scene "Ray Tracing: the Next Week"
 
 ![cover scene - ray tracing 2](rendering/CoverSceneRT2_800x800_10000_samples.png)
 
+Spheres
+
+![spheres](rendering/Spheres_2000x1000_10000_samples.png)
+
+![spheres in fog](rendering/SpheresFog_2000x1000_10000_samples_test_4.png)
+
 ---
 
 Recommended
