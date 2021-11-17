@@ -1,7 +1,7 @@
 use crate::core::HitRecord;
 use crate::core::ScatterRecord;
 use crate::math::Ray;
-use crate::types::{ColorRGB, FSize};
+use crate::types::{ColorRGB, ColorRGBA, FSize, Point3, TextureCoordinate};
 use std::error::Error;
 use std::sync::Arc;
 
@@ -31,6 +31,10 @@ pub trait Material: Sync + Send {
 
     fn material(&self) -> Option<Arc<dyn Material>> {
         None
+    }
+
+    fn color_channels(&self, _: &TextureCoordinate, _: &Point3) -> ColorRGBA {
+        ColorRGBA::new(0.0, 0.0, 0.0, 0.0)
     }
 
     /// Scatter a ray at a point on the material.

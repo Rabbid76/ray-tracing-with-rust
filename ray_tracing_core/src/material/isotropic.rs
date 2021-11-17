@@ -5,7 +5,7 @@ use crate::material::{Material, Visitor};
 use crate::math::Ray;
 use crate::random;
 use crate::texture::Texture;
-use crate::types::{ColorRGB, FSize};
+use crate::types::{ColorRGB, ColorRGBA, FSize, Point3, TextureCoordinate};
 use std::error::Error;
 use std::sync::Arc;
 
@@ -28,13 +28,16 @@ impl Material for Isotropic {
         self.id
     }
 
+    fn color_channels(&self, uv: &TextureCoordinate, p: &Point3) -> ColorRGBA {
+        self.albedo.value(uv, p)
+    }
+
     fn scatter(
         &self,
         self_material: Arc<dyn Material>,
         ray_in: &Ray,
         hit_record: &HitRecord,
     ) -> Option<ScatterRecord> {
-        let albedo = self.albedo.value(&hit_record.uv, &hit_record.position);
         Some(ScatterRecord::new(
             Ray::new_ray_with_attributes(
                 hit_record.position,
@@ -42,8 +45,8 @@ impl Material for Isotropic {
                 ray_in,
             ),
             true,
-            albedo.truncate(3),
-            albedo.w,
+            hit_record.color_channels.truncate(3),
+            hit_record.color_channels.w,
             None,
             self_material,
         ))
@@ -88,6 +91,7 @@ mod isotropic_test {
                 Point3::new(0.0, 0.0, 0.0),
                 Vector3::new(0.0, 0.0, 1.0),
                 Arc::new(NoMaterial::new()),
+                ColorRGBA::new(1.0, 0.0, 0.0, 1.0),
             ),
         );
         match result {

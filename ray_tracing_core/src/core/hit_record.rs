@@ -2,7 +2,7 @@ use crate::core::ScatterRecord;
 use crate::material::{Material, NoMaterial};
 use crate::math::Ray;
 use crate::random;
-use crate::types::{FSize, Point3, TextureCoordinate, Vector3};
+use crate::types::{ColorRGBA, FSize, Point3, TextureCoordinate, Vector3};
 use std::sync::Arc;
 
 /// Object that stores information when a ray hits an object such as shape or volume.
@@ -12,7 +12,7 @@ pub struct HitRecord {
     pub position: Point3,
     pub normal: Vector3,
     pub material: Arc<dyn Material>,
-    pub scatter_result: Option<ScatterRecord>,
+    pub color_channels: ColorRGBA,
 }
 
 impl HitRecord {
@@ -23,7 +23,7 @@ impl HitRecord {
             position: Point3::new(0.0, 0.0, 0.0),
             normal: Vector3::new(0.0, 0.0, 0.0),
             material: Arc::new(NoMaterial::new()),
-            scatter_result: None,
+            color_channels: ColorRGBA::new(0.0, 0.0, 0.0, 0.0),
         }
     }
 
@@ -33,24 +33,7 @@ impl HitRecord {
         position: Point3,
         normal: Vector3,
         material: Arc<dyn Material>,
-    ) -> HitRecord {
-        HitRecord {
-            t,
-            uv,
-            position,
-            normal,
-            material: material,
-            scatter_result: None,
-        }
-    }
-
-    pub fn new_with_color(
-        t: FSize,
-        uv: TextureCoordinate,
-        position: Point3,
-        normal: Vector3,
-        material: Arc<dyn Material>,
-        scatter_result: Option<ScatterRecord>,
+        color_channels: ColorRGBA,
     ) -> HitRecord {
         HitRecord {
             t,
@@ -58,7 +41,7 @@ impl HitRecord {
             position,
             normal,
             material,
-            scatter_result,
+            color_channels,
         }
     }
 
@@ -69,11 +52,12 @@ impl HitRecord {
             hit_record.position,
             hit_record.normal,
             hit_record.material.clone(),
+            hit_record.color_channels,
         )
     }
 
     pub fn check_alpha_and_create(
-        ray_in: &Ray,
+        _ray_in: &Ray,
         t: FSize,
         uv: TextureCoordinate,
         position: Point3,
@@ -84,24 +68,18 @@ impl HitRecord {
             Some(m) => m,
             None => material,
         };
-        if selected_material.has_alpha() {
-            let mut hit_record = HitRecord::new(t, uv, position, normal, selected_material.clone());
-            match hit_record
-                .material
-                .scatter(selected_material.clone(), ray_in, &hit_record)
-            {
-                Some(scatter_record) => {
-                    if random::generate_size() < scatter_record.alpha {
-                        hit_record.scatter_result = Some(scatter_record);
-                        Some(hit_record)
-                    } else {
-                        None
-                    }
-                }
-                None => None,
-            }
+        let color_channels = selected_material.color_channels(&uv, &position);
+        if selected_material.has_alpha() && random::generate_size() < color_channels.w {
+            None
         } else {
-            Some(HitRecord::new(t, uv, position, normal, selected_material))
+            Some(HitRecord::new(
+                t,
+                uv,
+                position,
+                normal,
+                selected_material,
+                color_channels,
+            ))
         }
     }
 
@@ -114,10 +92,7 @@ impl HitRecord {
     }
 
     pub fn scatter(&self, ray_in: &Ray) -> Option<ScatterRecord> {
-        match &self.scatter_result {
-            Some(scatter_result) => Some(scatter_result.clone()),
-            None => self.material.scatter(self.material.clone(), ray_in, &self),
-        }
+        self.material.scatter(self.material.clone(), ray_in, &self)
     }
 }
 
@@ -134,6 +109,7 @@ mod hit_record_test {
             Point3::new(0.0, 0.0, 0.0),
             Vector3::new(1.0, 2.0, 3.0),
             Arc::new(NoMaterial::new()),
+            ColorRGBA::new(1.0, 1.0, 1.0, 1.0),
         );
         hr.invert_normal();
         test::assert_eq_vector3(&hr.normal, &Vector3::new(-1.0, -2.0, -3.0), 0.001)
@@ -147,6 +123,7 @@ mod hit_record_test {
             Point3::new(1.0, 2.0, 3.0),
             Vector3::new(0.0, 0.0, 0.0),
             Arc::new(NoMaterial::new()),
+            ColorRGBA::new(1.0, 1.0, 1.0, 1.0),
         );
         hr.displace(Vector3::new(0.5, 1.5, 2.5));
         test::assert_eq_vector3(&hr.position, &Vector3::new(1.5, 3.5, 5.5), 0.001)

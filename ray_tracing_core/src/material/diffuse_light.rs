@@ -4,7 +4,7 @@ use crate::core::ScatterRecord;
 use crate::material::{Material, Visitor};
 use crate::math::Ray;
 use crate::texture::Texture;
-use crate::types::{ColorRGB, FSize};
+use crate::types::{ColorRGB, ColorRGBA, FSize, Point3, TextureCoordinate};
 use std::error::Error;
 use std::sync::Arc;
 
@@ -25,6 +25,10 @@ impl DiffuseLight {
 impl Material for DiffuseLight {
     fn get_id(&self) -> usize {
         self.id
+    }
+
+    fn color_channels(&self, _: &TextureCoordinate, _: &Point3) -> ColorRGBA {
+        ColorRGBA::new(0.0, 0.0, 0.0, 1.0)
     }
 
     fn scatter(
@@ -81,6 +85,7 @@ mod diffuse_light_test {
                 Point3::new(0.0, 0.0, 0.0),
                 Vector3::new(0.0, 0.0, 1.0),
                 Arc::new(NoMaterial::new()),
+                ColorRGBA::new(1.0, 1.0, 1.0, 1.0),
             ),
         );
         match result {
@@ -102,6 +107,7 @@ mod diffuse_light_test {
                 Point3::new(0.0, 0.0, 0.0),
                 Vector3::new(0.0, 0.0, 1.0),
                 Arc::new(NoMaterial::new()),
+                ColorRGBA::new(1.0, 1.0, 1.0, 1.0),
             ),
         );
         test::assert_eq_vector3(&c, &ColorRGB::new(1.0, 0.0, 0.0), 0.01);

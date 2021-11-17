@@ -6,7 +6,7 @@ use crate::math::{OrthoNormalBase, Ray};
 use crate::probability_density_function::CosinePdf;
 use crate::random;
 use crate::texture::Texture;
-use crate::types::{ColorRGB, FSize};
+use crate::types::{ColorRGB, ColorRGBA, FSize, Point3, TextureCoordinate};
 use std::error::Error;
 use std::f64::consts::PI;
 use std::sync::Arc;
@@ -31,6 +31,10 @@ impl Material for Lambertian {
         self.id
     }
 
+    fn color_channels(&self, uv: &TextureCoordinate, p: &Point3) -> ColorRGBA {
+        self.albedo.value(uv, p)
+    }
+
     fn scatter(
         &self,
         self_material: Arc<dyn Material>,
@@ -40,12 +44,11 @@ impl Material for Lambertian {
         let nv = hit_record.normal * glm::sign(glm::dot(ray_in.direction, hit_record.normal));
         let uvw = OrthoNormalBase::form_w(&nv);
         let direction = glm::normalize(uvw.local(random::generate_cosine_direction()));
-        let albedo = self.albedo.value(&hit_record.uv, &hit_record.position);
         Some(ScatterRecord::new(
             Ray::new_ray_with_attributes(hit_record.position, direction, ray_in),
             false,
-            albedo.truncate(3),
-            albedo.w,
+            hit_record.color_channels.truncate(3),
+            hit_record.color_channels.w,
             Some(Arc::new(CosinePdf::from_w(&hit_record.normal))),
             self_material,
         ))
@@ -95,6 +98,7 @@ mod lambertian_test {
                 Point3::new(0.0, 0.0, 0.0),
                 Vector3::new(0.0, 0.0, 1.0),
                 Arc::new(NoMaterial::new()),
+                ColorRGBA::new(0.0, 0.0, 0.0, 1.0),
             ),
         );
         match result {

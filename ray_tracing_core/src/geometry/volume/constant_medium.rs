@@ -80,6 +80,8 @@ impl Geometry for ConstantMedium {
                                 p,
                                 Vector3::new(1.0, 0.0, 0.0), // arbitrary
                                 self.phase_function.clone(),
+                                self.phase_function
+                                    .color_channels(&TextureCoordinate::from_uv(0.0, 0.0), &p),
                             ));
                         }
                         None

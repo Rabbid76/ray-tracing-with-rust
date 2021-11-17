@@ -6,7 +6,7 @@ use crate::math::Ray;
 use crate::random;
 use crate::texture::Texture;
 use crate::types;
-use crate::types::{ColorRGB, ColorRGBA, FSize};
+use crate::types::{ColorRGB, ColorRGBA, FSize, Point3, TextureCoordinate};
 use std::error::Error;
 use std::ops::Range;
 use std::sync::Arc;
@@ -39,6 +39,10 @@ impl Material for Dielectric {
         self.id
     }
 
+    fn color_channels(&self, uv: &TextureCoordinate, p: &Point3) -> ColorRGBA {
+        self.albedo.value(uv, p)
+    }
+
     fn scatter(
         &self,
         self_material: Arc<dyn Material>,
@@ -47,7 +51,7 @@ impl Material for Dielectric {
     ) -> Option<ScatterRecord> {
         let r_dot_n = glm::dot(ray_in.direction, hit_record.normal);
 
-        let mut albedo = self.albedo.value(&hit_record.uv, &hit_record.position);
+        let mut albedo = hit_record.color_channels;
         let mut w = ray_in.w;
         if self.ref_idx.end > self.ref_idx.start + 0.00001 && w.is_none() {
             let w_value = random::generate_size();
@@ -136,6 +140,7 @@ mod dielectric_test {
                 Point3::new(0.0, 0.0, 0.0),
                 Vector3::new(0.0, 0.0, 1.0),
                 Arc::new(NoMaterial::new()),
+                ColorRGBA::new(1.0, 1.0, 1.0, 1.0),
             ),
         );
         match result {
