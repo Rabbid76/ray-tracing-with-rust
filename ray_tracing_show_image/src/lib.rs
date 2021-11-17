@@ -1,10 +1,10 @@
 //! # Crate ray_tracing_show_image
-//! 
+//!
 //! GitHub page [rabbid76.github.io/ray-tracing-with-rust](https://rabbid76.github.io/ray-tracing-with-rust/)  
 //! GitHub repository [Rabbid76/ray-tracing-with-rust](https://github.com/Rabbid76/ray-tracing-with-rust)
-//! 
+//!
 //! A very simple viewer of ray tracing progress
-//! 
+//!
 //! Shows the ray tracing progress in a window. The window is updated every second.
 //! When "F1" is pressed, a callback is invoked with the intermediate rendering result.
 //! This can be used to save the rendering.
@@ -50,7 +50,7 @@
 //!     Ok(())
 //! }
 //! ```
-//! 
+//!
 //! ![TestSceneSimple_800x400_10000_samples](https://raw.githubusercontent.com/Rabbid76/ray-tracing-with-rust/main/rendering/TestSceneSimple_800x400_10000_samples.png)
 
 use ray_tracing_utility::view;
@@ -79,7 +79,6 @@ impl ShowImageWindow {
             borderless: false,
             overlays_visible: false,
             default_controls: false,
-
         };
         let window = show_image::create_window("ray trace", window_options).unwrap();
         let event_channel = Rc::new(window.event_channel().unwrap());

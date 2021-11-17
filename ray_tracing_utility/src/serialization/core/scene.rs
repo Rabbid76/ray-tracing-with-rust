@@ -129,7 +129,11 @@ impl Scene {
         object: &T,
         convert: F,
     ) where
-        F: Fn(&T, usize, &HashMap<usize, Arc<dyn geometry::Geometry>>) -> Arc<dyn geometry::Geometry>,
+        F: Fn(
+            &T,
+            usize,
+            &HashMap<usize, Arc<dyn geometry::Geometry>>,
+        ) -> Arc<dyn geometry::Geometry>,
     {
         for index in 0..id.len() {
             container.insert(id.get_id(index), convert(object, index, container));

@@ -112,7 +112,7 @@ mod lambertian_test {
                 );
                 test::assert_in_range_vector3(
                     scatter_record.ray.direction,
-                    Vector3::new(-1.0, -1.0, 0.0)..Vector3::new(1.0, 1.0, 2.0),
+                    Vector3::new(-1.0, -1.0, -1.0)..Vector3::new(1.0, 1.0, 1.0),
                 );
                 assert!(glm::length(scatter_record.ray.direction) <= 2.0);
                 test::assert_eq_float(scatter_record.ray.time, 0.0, 0.001);

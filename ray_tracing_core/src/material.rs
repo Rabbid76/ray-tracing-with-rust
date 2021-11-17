@@ -29,6 +29,10 @@ pub use self::lambertian::Lambertian;
 pub trait Material: Sync + Send {
     fn get_id(&self) -> usize;
 
+    fn material(&self) -> Option<Arc<dyn Material>> {
+        None
+    }
+
     /// Scatter a ray at a point on the material.
     /// Returns a tuple with the color attenuation and outgoing ray and
     fn scatter(

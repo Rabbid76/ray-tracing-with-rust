@@ -1,8 +1,8 @@
 //! # Crate ray_tracing_core
-//! 
+//!
 //! GitHub page [rabbid76.github.io/ray-tracing-with-rust](https://rabbid76.github.io/ray-tracing-with-rust/)  
 //! GitHub repository [Rabbid76/ray-tracing-with-rust](https://github.com/Rabbid76/ray-tracing-with-rust)
-//! 
+//!
 //! Based on [Peter Shirley's](https://research.nvidia.com/person/peter-shirley) books:
 //!
 //! - ["Ray Tracing in One Weekend (Ray Tracing Minibooks Book 1)"](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
@@ -10,10 +10,10 @@
 //! - ["Ray Tracing: The Rest of Your Life (Ray Tracing Minibooks Book 3)"](https://raytracing.github.io/books/RayTracingTheRestOfYourLife.html)
 //!
 //! ![cover scene - ray tracing 3](https://raw.githubusercontent.com/Rabbid76/ray-tracing-with-rust/main/rendering/RoomGlassSphere_800x800_100000_samples.png)
-//! 
+//!
 //! “Note that I avoid most “modern features” of C++, but inheritance and operator overloading are too useful for ray tracers to pass on.”  
 //! ― [Peter Shirley](https://research.nvidia.com/person/peter-shirley), [Ray Tracing in One Weekend](https://www.goodreads.com/book/show/28794030-ray-tracing-in-one-weekend)
-//! 
+//!
 //! # Example
 //!
 //! ```rust

@@ -80,11 +80,15 @@ impl HitRecord {
         normal: Vector3,
         material: Arc<dyn Material>,
     ) -> Option<HitRecord> {
-        if material.has_alpha() {
-            let mut hit_record = HitRecord::new(t, uv, position, normal, material.clone());
+        let selected_material = match material.material() {
+            Some(m) => m,
+            None => material,
+        };
+        if selected_material.has_alpha() {
+            let mut hit_record = HitRecord::new(t, uv, position, normal, selected_material.clone());
             match hit_record
                 .material
-                .scatter(material.clone(), ray_in, &hit_record)
+                .scatter(selected_material.clone(), ray_in, &hit_record)
             {
                 Some(scatter_record) => {
                     if random::generate_size() < scatter_record.alpha {
@@ -97,7 +101,7 @@ impl HitRecord {
                 None => None,
             }
         } else {
-            Some(HitRecord::new(t, uv, position, normal, material))
+            Some(HitRecord::new(t, uv, position, normal, selected_material))
         }
     }
 

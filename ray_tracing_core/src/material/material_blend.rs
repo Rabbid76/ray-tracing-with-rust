@@ -44,37 +44,29 @@ impl Material for MaterialBlend {
         self.id
     }
 
-    fn scatter(
-        &self,
-        _self_material: Arc<dyn Material>,
-        ray_in: &Ray,
-        hit_record: &HitRecord,
-    ) -> Option<ScatterRecord> {
+    fn material(&self) -> Option<Arc<dyn Material>> {
         let random_weight = random::generate_size();
         let mut i = 0;
         while i < self.weights.len() - 1 && random_weight > self.weights[i] {
             i += 1;
         }
-        self.materials[i]
-            .1
-            .scatter(self.materials[i].1.clone(), ray_in, hit_record)
+        Some(self.materials[i].1.clone())
+    }
+
+    fn scatter(&self, _: Arc<dyn Material>, _: &Ray, _: &HitRecord) -> Option<ScatterRecord> {
+        panic!("internal error")
     }
 
     fn scattering_pdf(&self, _: &Ray, _: &HitRecord, _: &Ray) -> FSize {
-        1.0
+        panic!("internal error")
     }
 
     fn has_alpha(&self) -> bool {
-        self.materials.iter().any(|(_, m)| m.has_alpha())
+        panic!("internal error")
     }
 
-    fn emitted(&self, ray_in: &Ray, hit_record: &HitRecord) -> ColorRGB {
-        let random_weight = random::generate_size();
-        let mut i = 0;
-        while i < self.weights.len() - 1 && random_weight > self.weights[i] {
-            i += 1;
-        }
-        self.materials[i].1.emitted(ray_in, hit_record)
+    fn emitted(&self, _: &Ray, _: &HitRecord) -> ColorRGB {
+        panic!("internal error")
     }
 
     fn accept(&self, visitor: &mut dyn Visitor) -> Result<(), Box<dyn Error>> {
@@ -83,79 +75,4 @@ impl Material for MaterialBlend {
 }
 
 #[cfg(test)]
-mod material_blend_test {
-    use super::*;
-    use crate::material::{DiffuseLight, Lambertian, NoMaterial};
-    use crate::test;
-    use crate::texture::ConstantTexture;
-    use crate::types::{ColorRGBA, Point3, TextureCoordinate, Vector3};
-
-    #[test]
-    fn scatter_test() {
-        let m1 = Lambertian::new(Arc::new(ConstantTexture::new(ColorRGBA::new(
-            0.0, 0.0, 0.0, 1.0,
-        ))));
-        let m2 = Lambertian::new(Arc::new(ConstantTexture::new(ColorRGBA::new(
-            0.0, 0.0, 0.0, 1.0,
-        ))));
-        let m = Arc::new(MaterialBlend::new(vec![
-            (1.0, Arc::new(m1)),
-            (1.0, Arc::new(m2)),
-        ]));
-        let result = m.scatter(
-            m.clone(),
-            &Ray::new_ray(Point3::new(1.0, 0.0, 0.0), Vector3::new(0.0, 0.0, -1.0)),
-            &HitRecord::new(
-                0.0,
-                TextureCoordinate::from_uv(0.0, 0.0),
-                Point3::new(0.0, 0.0, 0.0),
-                Vector3::new(0.0, 0.0, 1.0),
-                Arc::new(NoMaterial::new()),
-            ),
-        );
-        match result {
-            Some(scatter_record) => {
-                test::assert_eq_vector3(
-                    &scatter_record.attenuation,
-                    &ColorRGB::new(0.0, 0.0, 0.0),
-                    0.001,
-                );
-                test::assert_eq_float(scatter_record.alpha, 1.0, 0.001);
-                test::assert_eq_vector3(
-                    &scatter_record.ray.origin,
-                    &Point3::new(0.0, 0.0, 0.0),
-                    0.001,
-                );
-                test::assert_in_range_vector3(
-                    scatter_record.ray.direction,
-                    Vector3::new(-1.0, -1.0, 0.0)..Vector3::new(1.0, 1.0, 2.0),
-                );
-                assert!(glm::length(scatter_record.ray.direction) <= 2.0);
-                test::assert_eq_float(scatter_record.ray.time, 0.0, 0.001);
-            }
-            None => panic!("no result"),
-        }
-    }
-
-    #[test]
-    fn emitted_test() {
-        let m1 = Lambertian::new(Arc::new(ConstantTexture::new(ColorRGBA::new(
-            0.0, 1.0, 0.0, 1.0,
-        ))));
-        let m2 = DiffuseLight::new(Arc::new(ConstantTexture::new(ColorRGBA::new(
-            0.0, 0.0, 0.0, 1.0,
-        ))));
-        let m = MaterialBlend::new(vec![(1.0, Arc::new(m1)), (1.0, Arc::new(m2))]);
-        let c = m.emitted(
-            &Ray::new_ray(Point3::new(1.0, 0.0, 0.0), Vector3::new(0.0, 0.0, -1.0)),
-            &HitRecord::new(
-                0.0,
-                TextureCoordinate::from_uv(0.0, 0.0),
-                Point3::new(0.0, 0.0, 0.0),
-                Vector3::new(0.0, 0.0, 1.0),
-                Arc::new(NoMaterial::new()),
-            ),
-        );
-        test::assert_eq_vector3(&c, &ColorRGB::new(0.0, 0.0, 0.0), 0.001);
-    }
-}
+mod material_blend_test {}

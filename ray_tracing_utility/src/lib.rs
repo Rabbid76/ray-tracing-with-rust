@@ -1,14 +1,14 @@
 //! # Crate ray_tracing_utility
-//! 
+//!
 //! GitHub page [rabbid76.github.io/ray-tracing-with-rust](https://rabbid76.github.io/ray-tracing-with-rust/)  
 //! GitHub repository [Rabbid76/ray-tracing-with-rust](https://github.com/Rabbid76/ray-tracing-with-rust)
-//! 
-//! Deserialization and rendering process 
-//! 
+//!
+//! Deserialization and rendering process
+//!
 //! # Example
-//! 
+//!
 //! ## Process
-//! 
+//!
 //! ```rust
 //! use ray_tracing_core::random;
 //! use ray_tracing_core::test::TestSceneSimple;
@@ -47,7 +47,7 @@
 //! ```
 //!
 //! ## Serialization
-//! 
+//!
 //! ```rust
 //! use ray_tracing_core::test::TestSceneSimple;
 //! use ray_tracing_utility::serialization::json;
@@ -62,7 +62,7 @@
 //!     Ok(())
 //! }
 //! ```
-//! 
+//!
 //! ## Deserialization
 //!
 //! ```rust
