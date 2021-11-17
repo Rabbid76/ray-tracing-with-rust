@@ -17,9 +17,29 @@ Crates:
 - [Crate ray_tracing_utility](https://docs.rs/ray_tracing_utility/0.1.0/ray_tracing_utility/)
 - [Crate ray_tracing_show_image](https://docs.rs/ray_tracing_show_image/0.1.0/ray_tracing_show_image/)
 
+## Renderings
+
+Cover scene "Ray Tracing: The Rest of Your Life"
+
 ![cover scene - ray tracing 3](rendering/RoomGlassSphere_800x800_100000_samples.png)
 
-## Ray Tracing in One Weekend
+Cover scene "Ray Tracing: the Next Week"
+
+![cover scene - ray tracing 2](rendering/CoverSceneRT2_800x800_10000_samples.png)
+
+Cover scene "Ray Tracing in One Weekend"
+
+![cover scene - ray tracing 1](rendering/CoverSceneRT1_800x400_10000_samples.png)
+
+Cover scene "Ray Tracing in One Weekend" with moving spheres
+
+![cover scene - ray tracing 1 motion](rendering/CoverSceneRT1Motion_800x400_10000_samples.png)
+
+Spheres
+
+![spheres](rendering/Spheres_2000x1000_10000_samples.png)
+
+![spheres in fog](rendering/SpheresFog_2000x1000_10000_samples_test_4.png)
 
 Materials
 
@@ -43,14 +63,6 @@ Dielectric
 Blending material
 
 ![material blend](rendering/MaterialBlend_800x400_10000_samples.png)
-
-Cover scene "Ray Tracing in One Weekend"
-
-![cover scene - ray tracing 1](rendering/CoverSceneRT1_800x400_10000_samples.png)
-
-Cover scene "Ray Tracing in One Weekend" with moving spheres
-
-![cover scene - ray tracing 1 motion](rendering/CoverSceneRT1Motion_800x400_10000_samples.png)
 
 Checker texture
 
@@ -87,16 +99,6 @@ Volume
 Mirror
 
 ![volume](rendering/RoomMirror_800x800_100000_samples.png)
-
-Cover scene "Ray Tracing: the Next Week"
-
-![cover scene - ray tracing 2](rendering/CoverSceneRT2_800x800_10000_samples.png)
-
-Spheres
-
-![spheres](rendering/Spheres_2000x1000_10000_samples.png)
-
-![spheres in fog](rendering/SpheresFog_2000x1000_10000_samples_test_4.png)
 
 ---
 
