@@ -27,12 +27,12 @@
 //!     let cy = 20;
 //!     let samples = 10;
 //!     let scene = TestSceneSimple::new().scene;
-//!
+//!     
 //!     let mut pixel_data: Vec<u8> = Vec::with_capacity(cx * cy * 4);
 //!     pixel_data.resize(cx * cy * 4, 0);
-//!
-//!     for y in 0..cy {
-//!         for x in 0..cx {
+//!     
+//!     for x in 0..cx {
+//!         for y in 0..cy {
 //!             let mut c = ColorRGB::new(0.0, 0.0, 0.0);
 //!             for _ in 0..samples {
 //!                 let u = (x as FSize + random::generate_size()) / cx as FSize;
@@ -40,7 +40,7 @@
 //!                 c = c + scene.ray_trace_color(u, v);
 //!             }
 //!             c = c / samples as FSize;
-//!
+//!     
 //!             let i = (y * cx) + x;
 //!             pixel_data[i * 4] = (c[0].sqrt() * 255.0).round() as u8;
 //!             pixel_data[i * 4 + 1] = (c[1].sqrt() * 255.0).round() as u8;
@@ -48,7 +48,7 @@
 //!             pixel_data[i * 4 + 3] = 255;
 //!         }
 //!     }
-//!
+//!     
 //!     // [...]
 //! }
 //!  ```

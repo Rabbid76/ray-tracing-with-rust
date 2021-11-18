@@ -280,6 +280,7 @@ pub enum RayTracingObject {
     ConstantTexture(ConstantTexture),
     BitmapFile(BitmapFile),
     CheckerTexture(CheckerTexture),
+    BlendTexture(BlendTexture),
     NoiseTexture(NoiseTexture),
     ColorFilter(ColorFilter),
     NoMaterial(NoMaterial),

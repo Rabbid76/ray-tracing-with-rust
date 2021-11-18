@@ -1,0 +1,41 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 310, 
+  "light_node_id": 304,
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [18.0, 14.0, -2.0],
+      "look_at": [0.0, 1.0, 2.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 25.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 10.0,
+      "time_from": 0.0, "time_to": 0.0 } 
+    },    
+    { "Sky": { "id": 3,"nadir_color": 0.1, "zenith_color": 0.0} },
+    { "ConstantTexture": { "id": 101, "color": [0.8, 0.8, 0.8] } },
+    { "ConstantTexture": { "id": 102, "color": [0.4, 0.4, 0.4] } },
+    { "CheckerTexture": { "id": 103, "scale": [1.0, 1.0, 1.0], "even_texture": 101, "odd_texture": 102 } },
+    { "ConstantTexture": { "id": 104, "color": [0.75, 1.5, 0.75] } },
+    { "ConstantTexture": { "id": 105, "color": [1.5, 0.75, 0.75] } },
+    { "BitmapFile": { "id": 106, "filename": "../resource/texture/BackgroundPatternWhite512x512.png" } },
+    { "BlendTexture": { "id": 107, "scale": [1.0, 1.0, 1.0], "first_texture": 104, "second_texture": 105, "mask_texture": 106 } }, 
+    { "ConstantTexture": { "id": 108, "color": [4.0, 4.0, 4.0] } },       
+    { "Lambertian": { "id": 201, "albedo": 103 } },
+    { "Dielectric": { "id": 202, "ref_idx": 1.2, "albedo": 107 } },
+    { "Metal": { "id": 203, "fuzz": 0.5, "albedo": 104 } },
+    { "MaterialBlend": { "id": 204, "weights": [4.0, 1.0], "materials": [202, 203] } },
+    { "DiffuseLight": { "id": 205, "emit": 108 } },
+    { "Sphere": { "id": 301, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 201 } },
+    { "Sphere": { "id": 302, "center": [0.0, 2.0, 0.0], "radius": -1.9, "material": 204 } },
+    { "Sphere": { "id": 303, "center": [0.0, 2.0, 0.0], "radius": 2.0, "material": 204 } },    
+    { "Sphere": { "id": 304, "center": [0.0, 8.0, -8.0], "radius": 2.0, "material": 205 } },      
+    { "Collection": { "id": 310, "object_id_list": [301, 302, 303, 304] } }
+  ]
+}
+

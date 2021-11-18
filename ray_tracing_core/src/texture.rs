@@ -7,6 +7,9 @@ pub use self::bitmap_texture::BitmapTexture;
 mod checker_texture;
 pub use self::checker_texture::CheckerTexture;
 
+mod blend_texture;
+pub use self::blend_texture::BlendTexture;
+
 mod constant_texture;
 pub use self::constant_texture::ConstantTexture;
 
@@ -31,6 +34,7 @@ pub trait Visitor {
     fn visit_constant_texture(&mut self, t: &ConstantTexture) -> Result<(), Box<dyn Error>>;
     fn visit_bitmap_texture(&mut self, t: &BitmapTexture) -> Result<(), Box<dyn Error>>;
     fn visit_checker_texture(&mut self, t: &CheckerTexture) -> Result<(), Box<dyn Error>>;
+    fn visit_blend_texture(&mut self, t: &BlendTexture) -> Result<(), Box<dyn Error>>;
     fn visit_noise_texture(&mut self, t: &NoiseTexture) -> Result<(), Box<dyn Error>>;
     fn visit_color_filter(&mut self, t: &ColorFilter) -> Result<(), Box<dyn Error>>;
 }
@@ -48,7 +52,7 @@ mod test_visitor {
     impl TestVisitor {
         pub fn default() -> TestVisitor {
             TestVisitor {
-                count: vec![0, 0, 0, 0, 0],
+                count: vec![0, 0, 0, 0, 0, 0],
             }
         }
 
@@ -72,12 +76,16 @@ mod test_visitor {
             self.count[2] += 1;
             Ok(())
         }
-        fn visit_noise_texture(&mut self, _: &NoiseTexture) -> Result<(), Box<dyn Error>> {
+        fn visit_blend_texture(&mut self, _: &BlendTexture) -> Result<(), Box<dyn Error>> {
             self.count[3] += 1;
             Ok(())
         }
-        fn visit_color_filter(&mut self, _: &ColorFilter) -> Result<(), Box<dyn Error>> {
+        fn visit_noise_texture(&mut self, _: &NoiseTexture) -> Result<(), Box<dyn Error>> {
             self.count[4] += 1;
+            Ok(())
+        }
+        fn visit_color_filter(&mut self, _: &ColorFilter) -> Result<(), Box<dyn Error>> {
+            self.count[5] += 1;
             Ok(())
         }
     }
@@ -109,13 +117,29 @@ mod test_visitor {
     }
 
     #[test]
+    pub fn test_visitor_blend_texture() {
+        let ct1 = ConstantTexture::new(ColorRGBA::new(0.0, 0.0, 0.0, 1.0));
+        let ct2 = ConstantTexture::new(ColorRGBA::new(1.0, 1.0, 1.0, 1.0));
+        let mt = ConstantTexture::new(ColorRGBA::new(1.0, 1.0, 1.0, 1.0));
+        let t = BlendTexture::new(
+            Vector3::new(0.0, 0.0, 0.0),
+            Arc::new(ct1),
+            Arc::new(ct2),
+            Arc::new(mt),
+        );
+        let mut v = TestVisitor::default();
+        t.accept(&mut v).unwrap();
+        v.evaluate(3, 1);
+    }
+
+    #[test]
     pub fn test_visitor_noise_texture() {
         let ct1 = ConstantTexture::new(ColorRGBA::new(0.0, 0.0, 0.0, 1.0));
         let ct2 = ConstantTexture::new(ColorRGBA::new(1.0, 1.0, 1.0, 1.0));
         let t = NoiseTexture::new(1.0, NoiseType::Default, Arc::new(ct1), Arc::new(ct2));
         let mut v = TestVisitor::default();
         t.accept(&mut v).unwrap();
-        v.evaluate(3, 1);
+        v.evaluate(4, 1);
     }
 
     #[test]
@@ -129,6 +153,6 @@ mod test_visitor {
         );
         let mut v = TestVisitor::default();
         t.accept(&mut v).unwrap();
-        v.evaluate(4, 1);
+        v.evaluate(5, 1);
     }
 }

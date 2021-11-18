@@ -192,6 +192,19 @@ impl Scene {
                         )
                     })
                 }
+                RayTracingObject::BlendTexture(t) => {
+                    Scene::insert_texture(&mut texture_map, &t.id, t, |t, i, tm| {
+                        Arc::new(
+                            t.to_texture(
+                                i,
+                                Scene::get_texture(tm, &t.first_texture, i),
+                                Scene::get_texture(tm, &t.second_texture, i),
+                                Scene::get_texture(tm, &t.mask_texture, i),
+                            )
+                            .unwrap(),
+                        )
+                    })
+                }
                 RayTracingObject::NoiseTexture(t) => {
                     Scene::insert_texture(&mut texture_map, &t.id, t, |t, i, tm| {
                         Arc::new(

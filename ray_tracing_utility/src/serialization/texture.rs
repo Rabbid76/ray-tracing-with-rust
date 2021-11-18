@@ -15,6 +15,9 @@ pub use self::bitmap_file::*;
 mod checker_texture;
 pub use self::checker_texture::*;
 
+mod blend_texture;
+pub use self::blend_texture::*;
+
 mod noise_texture;
 pub use self::noise_texture::*;
 
@@ -57,6 +60,18 @@ impl texture::Visitor for SerializeTexture {
         self.object_map.borrow_mut().insert(
             t.id,
             RayTracingObject::CheckerTexture(CheckerTexture::from_texture(t)?),
+        );
+        Ok(())
+    }
+
+    fn visit_blend_texture(&mut self, t: &texture::BlendTexture) -> Result<(), Box<dyn Error>> {
+        self.add_texture(t.first_texture.clone())?;
+        self.add_texture(t.second_texture.clone())?;
+        self.add_texture(t.mask_texture.clone())?;
+
+        self.object_map.borrow_mut().insert(
+            t.id,
+            RayTracingObject::BlendTexture(BlendTexture::from_texture(t)?),
         );
         Ok(())
     }
@@ -129,6 +144,44 @@ mod serialize_texture_test {
         };
         match &s.object_map.borrow_mut()[&ct.id] {
             RayTracingObject::CheckerTexture(_) => (),
+            _ => panic!("unexpected ray tracing object"),
+        };
+    }
+
+    #[test]
+    fn visit_blend_texture_test() {
+        let mut s = SerializeTexture {
+            object_map: Rc::new(RefCell::new(HashMap::default())),
+        };
+        let ct1 = Arc::new(texture::ConstantTexture::new(ColorRGBA::new(
+            0.0, 0.0, 0.0, 1.0,
+        )));
+        let ct1_id = ct1.clone().id;
+        let ct2 = Arc::new(texture::ConstantTexture::new(ColorRGBA::new(
+            1.0, 1.0, 1.0, 1.0,
+        )));
+        let ct2_id = ct2.clone().id;
+        let mt = Arc::new(texture::ConstantTexture::new(ColorRGBA::new(
+            0.5, 0.5, 0.5, 0.5,
+        )));
+        let mt_id = mt.clone().id;
+        let ct = texture::BlendTexture::new(Vector3::new(0.5, 0.5, 0.5), ct1, ct2, mt);
+        ct.accept(&mut s).unwrap();
+        assert_eq!(s.object_map.borrow_mut().len(), 4);
+        match &s.object_map.borrow_mut()[&ct1_id] {
+            RayTracingObject::ConstantTexture(_) => (),
+            _ => panic!("unexpected ray tracing object"),
+        };
+        match &s.object_map.borrow_mut()[&ct2_id] {
+            RayTracingObject::ConstantTexture(_) => (),
+            _ => panic!("unexpected ray tracing object"),
+        };
+        match &s.object_map.borrow_mut()[&mt_id] {
+            RayTracingObject::ConstantTexture(_) => (),
+            _ => panic!("unexpected ray tracing object"),
+        };
+        match &s.object_map.borrow_mut()[&ct.id] {
+            RayTracingObject::BlendTexture(_) => (),
             _ => panic!("unexpected ray tracing object"),
         };
     }
