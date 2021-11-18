@@ -27,7 +27,7 @@ impl Dielectric {
     }
 
     fn hue_to_rgb(h: FSize) -> ColorRGBA {
-        let r = glm::clamp(FSize::abs(h * 6.0 + 3.0) - 1.0, 0.0, 1.0);
+        let r = glm::clamp(FSize::abs(h * 6.0 - 3.0) - 1.0, 0.0, 1.0);
         let g = glm::clamp(2.0 - FSize::abs(h * 6.0 - 2.0), 0.0, 1.0);
         let b = glm::clamp(2.0 - FSize::abs(h * 6.0 - 4.0), 0.0, 1.0);
         ColorRGBA::new(r, g, b, 1.0)
@@ -55,7 +55,7 @@ impl Material for Dielectric {
         let mut w = ray_in.w;
         if self.ref_idx.end > self.ref_idx.start + 0.00001 && w.is_none() {
             let w_value = random::generate_size();
-            albedo = albedo * Dielectric::hue_to_rgb((1.0 - w_value) * 300.0 / 360.0);
+            albedo = albedo * Dielectric::hue_to_rgb(glm::clamp((1.0 - w_value) * 5.0 / 6.0, 0.0, 1.0));
             w = Some(w_value);
         }
         let ref_idx = match w {
