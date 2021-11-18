@@ -69,7 +69,7 @@ impl HitRecord {
             None => material,
         };
         let color_channels = selected_material.color_channels(&uv, &position);
-        if selected_material.has_alpha() && random::generate_size() < color_channels.w {
+        if selected_material.has_alpha() && random::generate_size() > color_channels.w {
             None
         } else {
             Some(HitRecord::new(
