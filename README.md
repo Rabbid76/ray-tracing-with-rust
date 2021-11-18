@@ -57,7 +57,6 @@ Dielectric
 
 ![dielectric 1](rendering/MaterialDielectric1_800x400_10000_samples.png)
 
-(Physically completely wrong, but a nice effect)  
 ![dielectric 2](rendering/MaterialDielectric2_800x400_10000_samples.png)
 
 Blending material

@@ -55,7 +55,7 @@ impl Material for Dielectric {
         let mut w = ray_in.w;
         if self.ref_idx.end > self.ref_idx.start + 0.00001 && w.is_none() {
             let w_value = random::generate_size();
-            albedo = albedo * Dielectric::hue_to_rgb(glm::clamp((1.0 - w_value) * 5.0 / 6.0, 0.0, 1.0));
+            albedo = albedo * Dielectric::hue_to_rgb(glm::clamp((w_value) * 5.0 / 6.0, 0.0, 1.0));
             w = Some(w_value);
         }
         let ref_idx = match w {
