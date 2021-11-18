@@ -57,7 +57,6 @@ Dielectric
 
 ![dielectric 1](rendering/MaterialDielectric1_800x400_10000_samples.png)
 
-(Physically completely wrong, but a nice effect)  
 ![dielectric 2](rendering/MaterialDielectric2_800x400_10000_samples.png)
 
 Blending material
@@ -80,7 +79,7 @@ Bitmap texture
 
 ![bitmap texture](rendering/TextureBitmap_800x400_10000_samples.png)
 
-Bitmap texture with alpha mask (:construction: There is a normal vector bug on the backside of the sphere)
+Bitmap texture with alpha mask
 
 ![bitmap texture alpha mask](rendering/TextureBitmapAlpha_800x400_10000_samples.png)
 
