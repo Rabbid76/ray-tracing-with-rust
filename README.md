@@ -41,35 +41,17 @@ Spheres
 
 ![spheres in fog](rendering/SpheresFog_2000x1000_10000_samples_test_4.png)
 
-Materials
-
-![materials](rendering/Materials1_800x400_10000_samples.png)
-
-Defocus blur
-
-![defocus  blur](rendering/DefocusBlur_800x400_10000_samples.png)
-
-Motion blur
-
-![motion  blur](rendering/MotionBlur_800x400_10000_samples.png)
-
 Dielectric
 
 ![dielectric 1](rendering/MaterialDielectric1_800x400_10000_samples.png)
 
 ![dielectric 2](rendering/MaterialDielectric2_800x400_10000_samples.png)
 
+![dielectric 3](rendering/MaterialDielectric3_800x400_10000_samples.png)
+
 Blending material
 
 ![material blend](rendering/MaterialBlend_800x400_10000_samples.png)
-
-Checker texture
-
-![checker texture](rendering/TextureChecker_800x400_10000_samples.png)
-
-Noise texture
-
-![noise texture](rendering/TextureNoise_800x400_10000_samples.png)
 
 Marble
 
@@ -98,6 +80,26 @@ Volume
 Mirror
 
 ![volume](rendering/RoomMirror_800x800_100000_samples.png)
+
+Materials
+
+![materials](rendering/Materials1_800x400_10000_samples.png)
+
+Defocus blur
+
+![defocus  blur](rendering/DefocusBlur_800x400_10000_samples.png)
+
+Motion blur
+
+![motion  blur](rendering/MotionBlur_800x400_10000_samples.png)
+
+Checker texture
+
+![checker texture](rendering/TextureChecker_800x400_10000_samples.png)
+
+Noise texture
+
+![noise texture](rendering/TextureNoise_800x400_10000_samples.png)
 
 ---
 
