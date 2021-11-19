@@ -197,7 +197,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         80.0,
         Arc::new(Lambertian::new(Arc::new(NoiseTexture::new(
             0.1,
-            NoiseType::SinZ,
+            NoiseType::SinX,
             Arc::new(ConstantTexture::new(ColorRGBA::new(0.0, 0.0, 0.0, 1.0))),
             Arc::new(ConstantTexture::new(ColorRGBA::new(1.0, 1.0, 1.0, 1.0))),
         )))),
