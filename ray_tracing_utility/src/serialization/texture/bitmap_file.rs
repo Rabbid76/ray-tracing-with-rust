@@ -12,6 +12,17 @@ pub struct BitmapFile {
 }
 
 impl BitmapFile {
+    pub fn file_to_texture(filename: &String) -> Result<texture::BitmapTexture, Box<dyn Error>> {
+        let (nx, ny, pixel_data) = match image::load_image(&filename) {
+            Ok((nx, ny, pixel_data)) => (nx, ny, pixel_data),
+            Err(e) => {
+                eprintln!("error reading file: {}", filename);
+                return Err(e);
+            }
+        };
+        Ok(texture::BitmapTexture::new(nx, ny, pixel_data))
+    }
+
     pub fn to_texture(
         &self,
         index: usize,
