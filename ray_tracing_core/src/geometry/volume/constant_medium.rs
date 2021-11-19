@@ -12,6 +12,7 @@ use std::sync::Arc;
 pub struct ConstantMedium {
     pub id: usize,
     pub density: FSize,
+    pub neg_inv_density: FSize,
     pub boundary: Arc<dyn Geometry>,
     pub phase_function: Arc<dyn Material>,
 }
@@ -25,6 +26,22 @@ impl ConstantMedium {
         ConstantMedium {
             id: Object::new_id(),
             density,
+            neg_inv_density: -1.0 / density, 
+            boundary,
+            phase_function,
+        }
+    }
+
+    pub fn new_id(
+        id: usize,
+        density: FSize,
+        boundary: Arc<dyn Geometry>,
+        phase_function: Arc<dyn Material>,
+    ) -> ConstantMedium {
+        ConstantMedium {
+            id,
+            density,
+            neg_inv_density: -1.0 / density, 
             boundary,
             phase_function,
         }
@@ -66,12 +83,14 @@ impl Geometry for ConstantMedium {
                             record_1.t = 0.0;
                         }
 
-                        let distance_inside_boundary =
-                            (record_2.t - record_1.t) * glm::length(ray.direction);
-                        let hit_distance = -1.0 / self.density * FSize::ln(random::generate_size());
+                        let ray_length = glm::length(ray.direction);
+                        let distance_inside_boundary = (record_2.t - record_1.t) * ray_length;
+                        // Very fast approximate Logarithm (natural log) function in C++?
+                        // https://stackoverflow.com/questions/39821367/very-fast-approximate-logarithm-natural-log-function-in-c
+                        let hit_distance = self.neg_inv_density * FSize::ln(random::generate_size());
                         if hit_distance < distance_inside_boundary {
-                            let t = record_1.t + hit_distance / glm::length(ray.direction);
-                            let p = ray.point_at(hit_record.t);
+                            let t = record_1.t + hit_distance / ray_length;
+                            let p = ray.point_at(t);
                             //if (enableDebug)
                             //    Console.WriteLine($"hit_distance {hit_distance}; rec.T {rec.T}; rectP {rec.P}");
                             return Some(HitRecord::new(

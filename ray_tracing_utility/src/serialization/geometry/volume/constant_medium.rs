@@ -30,12 +30,12 @@ impl ConstantMedium {
         boundary: Arc<dyn Geometry>,
         phase_function: Arc<dyn Material>,
     ) -> Result<volume::ConstantMedium, Box<dyn Error>> {
-        Ok(volume::ConstantMedium {
-            id: self.id.get_id(index),
-            density: self.density.to_value()?,
+        Ok(volume::ConstantMedium::new_id(
+            self.id.get_id(index),
+            self.density.to_value()?,
             boundary,
             phase_function,
-        })
+        ))
     }
 }
 
