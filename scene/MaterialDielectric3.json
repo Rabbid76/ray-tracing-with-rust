@@ -28,12 +28,12 @@
     { "ConstantTexture": { "id": 108, "color": 10.0 } },       
     { "Lambertian": { "id": 201, "albedo": 103 } },
     { "Dielectric": { "id": 202, "ref_idx": 1.2, "albedo": 107 } },
-    { "Metal": { "id": 203, "fuzz": 0.5, "albedo": 104 } },
+    { "Metal": { "id": 203, "fuzz": 0.5, "albedo": 107 } },
     { "MaterialBlend": { "id": 204, "weights": [4.0, 1.0], "materials": [202, 203] } },
     { "DiffuseLight": { "id": 205, "emit": 108 } },
     { "Sphere": { "id": 301, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 201 } },
-    { "Sphere": { "id": 302, "center": [0.0, 2.0, 0.0], "radius": -1.9, "material": 204 } },
-    { "Sphere": { "id": 303, "center": [0.0, 2.0, 0.0], "radius": 2.0, "material": 204 } },    
+    { "Sphere": { "id": 302, "center": [0.0, 2.0, 0.0], "radius": -1.9, "material": 202 } },
+    { "Sphere": { "id": 303, "center": [0.0, 2.0, 0.0], "radius": 2.0, "material": 202 } },    
     { "Sphere": { "id": 304, "center": [0.0, 8.0, -8.0], "radius": 2.0, "material": 205 } },      
     { "Collection": { "id": 310, "object_id_list": [301, 302, 303, 304] } }
   ]

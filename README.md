@@ -67,7 +67,7 @@ Bitmap texture with alpha mask
 
 Diffuse light
 
-![diffuse light](rendering/LightDiffuse_800x400_10000_samples.png)
+![diffuse light1](rendering/LightDiffuse1_800x400_10000_samples.png)
 
 Room
 
