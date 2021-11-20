@@ -49,6 +49,12 @@ Dielectric
 
 ![dielectric 3](rendering/MaterialDielectric3_800x400_10000_samples.png)
 
+Diffuse light
+
+![diffuse light 1](rendering/LightDiffuse1_800x400_10000_samples.png)
+
+![diffuse light 2](rendering/LightDiffuse2_1024x1024_10000_samples.png)
+
 Blending material
 
 ![material blend](rendering/MaterialBlend_800x400_10000_samples.png)
@@ -65,9 +71,6 @@ Bitmap texture with alpha mask
 
 ![bitmap texture alpha mask](rendering/TextureBitmapAlpha_800x400_10000_samples.png)
 
-Diffuse light
-
-![diffuse light1](rendering/LightDiffuse1_800x400_10000_samples.png)
 
 Room
 

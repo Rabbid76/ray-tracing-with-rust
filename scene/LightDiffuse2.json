@@ -24,7 +24,7 @@
     { "ConstantTexture": { "id": 104, "color": [1.0, 1.0, 1.0] } },
     { "BitmapFile": { "id": 105, "filename": "../resource/texture/HalfPatternWhite16x16.png" } },
     { "ConstantTexture": { "id": 106, "color": [1.5, 0.75, 0.75] } },
-    { "ConstantTexture": { "id": 108, "color": [10.0, 10.0, 15.0] } },   
+    { "ConstantTexture": { "id": 108, "color": [10.0, 10.0, 12.0] } },   
     { "ConstantTexture": { "id": 109, "color": [1.0, 1.0, 1.0] } },
     { "ConstantTexture": { "id": 110, "color": [1.0, 1.0, 1.0] } }, 
     { "ConstantTexture": { "id": 111, "color": [1.0, 1.0, 0.5] } },    
