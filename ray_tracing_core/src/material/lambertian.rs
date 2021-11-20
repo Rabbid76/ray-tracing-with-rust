@@ -41,7 +41,7 @@ impl Material for Lambertian {
         ray_in: &Ray,
         hit_record: &HitRecord,
     ) -> Option<ScatterRecord> {
-        let nv = hit_record.normal * glm::sign(glm::dot(ray_in.direction, hit_record.normal));
+        let nv = hit_record.normal * -glm::sign(glm::dot(ray_in.direction, hit_record.normal));
         let uvw = OrthoNormalBase::form_w(&nv);
         let direction = glm::normalize(uvw.local(random::generate_cosine_direction()));
         Some(ScatterRecord::new(

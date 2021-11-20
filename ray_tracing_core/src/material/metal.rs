@@ -40,13 +40,14 @@ impl Material for Metal {
         ray_in: &Ray,
         hit_record: &HitRecord,
     ) -> Option<ScatterRecord> {
-        let reflected = glm::reflect(ray_in.direction, hit_record.normal);
+        let nv = hit_record.normal * -glm::sign(glm::dot(ray_in.direction, hit_record.normal));
+        let reflected = glm::reflect(ray_in.direction, nv);
         let scattered = Ray::new_ray_with_attributes(
             hit_record.position,
             reflected + random::generate_unit_sphere() * self.fuzz,
             ray_in,
         );
-        if glm::dot(scattered.direction, hit_record.normal) > 0.0 {
+        if glm::dot(scattered.direction, nv) > 0.0 {
             Some(ScatterRecord::new(
                 scattered,
                 true,
