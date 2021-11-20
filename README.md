@@ -13,9 +13,9 @@ Implemented with [Rust Programming Language](https://www.rust-lang.org/), based 
 
 Crates:
 
-- [Crate ray_tracing_core](https://docs.rs/ray_tracing_core/0.1.0/ray_tracing_core/)
-- [Crate ray_tracing_utility](https://docs.rs/ray_tracing_utility/0.1.0/ray_tracing_utility/)
-- [Crate ray_tracing_show_image](https://docs.rs/ray_tracing_show_image/0.1.0/ray_tracing_show_image/)
+- [Crate ray_tracing_core](https://docs.rs/ray_tracing_core/0.1.1/ray_tracing_core/)
+- [Crate ray_tracing_utility](https://docs.rs/ray_tracing_utility/0.1.1/ray_tracing_utility/)
+- [Crate ray_tracing_show_image](https://docs.rs/ray_tracing_show_image/0.1.1/ray_tracing_show_image/)
 
 ## Renderings
 
