@@ -8,6 +8,7 @@ use crate::types::{FSize, TextureCoordinate, Vector3};
 use std::error::Error;
 use std::ops::Range;
 use std::sync::Arc;
+use fastapprox::faster::ln;
 
 pub struct ConstantMedium {
     pub id: usize,
@@ -26,7 +27,7 @@ impl ConstantMedium {
         ConstantMedium {
             id: Object::new_id(),
             density,
-            neg_inv_density: -1.0 / density, 
+            neg_inv_density: -1.0 / density,
             boundary,
             phase_function,
         }
@@ -41,7 +42,7 @@ impl ConstantMedium {
         ConstantMedium {
             id,
             density,
-            neg_inv_density: -1.0 / density, 
+            neg_inv_density: -1.0 / density,
             boundary,
             phase_function,
         }
@@ -87,7 +88,8 @@ impl Geometry for ConstantMedium {
                         let distance_inside_boundary = (record_2.t - record_1.t) * ray_length;
                         // Very fast approximate Logarithm (natural log) function in C++?
                         // https://stackoverflow.com/questions/39821367/very-fast-approximate-logarithm-natural-log-function-in-c
-                        let hit_distance = self.neg_inv_density * FSize::ln(random::generate_size());
+                        //let hit_distance = self.neg_inv_density * FSize::ln(random::generate_size());
+                        let hit_distance = self.neg_inv_density * (ln(random::generate_size() as f32) as FSize);
                         if hit_distance < distance_inside_boundary {
                             let t = record_1.t + hit_distance / ray_length;
                             let p = ray.point_at(t);
