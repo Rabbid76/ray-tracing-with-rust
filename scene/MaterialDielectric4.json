@@ -1,0 +1,44 @@
+{
+  "configuration_id": 1,
+  "camera_id": 2, 
+  "sky_id": 3,
+  "root_node_id": 501, 
+  "light_node_id": 302,
+  "objects": [
+    { "Configuration": { "id": 1, "maximum_depth": 50 } },
+    { "CameraLookAt": { 
+      "id": 2, 
+      "look_from": [0.0, 6.0, -18.0],
+      "look_at": [0.0, 1.0, 0.0],
+      "vup": [0.0, 1.0, 0.0],
+      "v_fov": 35.0,
+      "aspect": 2.0,
+      "adepture": 0.0,
+      "focus_dist": 12.0,
+      "time_from": 0.0, "time_to": 0.0 } 
+    },    
+    { "Sky": { "id": 3,"nadir_color": 0.1, "zenith_color": 0.0} },
+    { "ConstantTexture": { "id": 101, "color": [0.8, 0.8, 0.8] } },
+    { "ConstantTexture": { "id": 102, "color": [0.4, 0.4, 0.4] } },
+    { "CheckerTexture": { "id": 103, "scale": [1.0, 1.0, 1.0], "even_texture": 101, "odd_texture": 102 } },
+    { "ConstantTexture": { "id": 104, "color": 10.0 } },       
+    { "ConstantTexture": { "id": 105, "color": [0.25, 0.25, 1.0] } },
+    { "ConstantTexture": { "id": 106, "color": [0.5, 0.5, 1.0] } },
+    { "ConstantTexture": { "id": 107, "color": [1.0, 1.0, 1.0] } },
+    { "DiffuseLight": { "id": 201, "emit": 104 } },
+    { "Lambertian": { "id": 202, "albedo": 103 } },
+    { "Dielectric": { "id": 203, "ref_idx": 1.5, "albedo": 105 } },
+    { "Dielectric": { "id": 204, "ref_idx": 1.5, "albedo": 106 } },
+    { "Dielectric": { "id": 205, "ref_idx": 1.5, "albedo": 107 } },
+    { "Isotropic": { "id": 206, "albedo": 106 } },
+    { "Sphere": { "id": 301, "center": [0.0, -1000.0, 0.0], "radius": 1000.0, "material": 202 } },
+    { "Sphere": { "id": 302, "center": [0.0, 10.0, 8.0], "radius": 2.0, "material": 201 } },      
+    { "Sphere": { "id": 303, "center": [0.0, 2.0, 0.0], "radius": -1.8, "material": 204 } },
+    { "Sphere": { "id": 304, "center": [0.0, 2.0, 0.0], "radius": 2.0, "material": 204 } },   
+    { "Sphere": { "id": 305, "center": [5.0, 2.0, 0.0], "radius": 2.0, "material": 203 } },
+    { "Sphere": { "id": 306, "center": [-5.0, 2.0, 0.0], "radius": 2.0, "material": 204 } },
+    { "ConstantMedium": { "id": 401, "density": 0.5, "boundary": 306, "phase_function": 206 } },       
+    { "Collection": { "id": 501, "object_id_list": [301, 302, 303, 304, 305, 306, 401] } }
+  ]
+}
+
