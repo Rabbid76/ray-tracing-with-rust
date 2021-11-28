@@ -16,6 +16,7 @@ pub struct BVHNode {
     pub left: Arc<dyn Geometry>,
     pub right: Arc<dyn Geometry>,
     bounding_box: Option<AABB>,
+    axis: usize,
 }
 
 impl BVHNode {
@@ -61,6 +62,7 @@ impl BVHNode {
             left,
             right,
             bounding_box: bounding_box,
+            axis,
         })
     }
 
@@ -99,20 +101,38 @@ impl Geometry for BVHNode {
             None => (),
         }
 
-        // TODO: test the "nearer" leaf first
-        match self.left.hit(ray, t_range.clone()) {
-            Some(left_hit) => {
-                let right_hit = self.right.hit(ray, t_range.start..left_hit.t);
-                match right_hit {
-                    Some(right_hit) => Some(right_hit),
-                    _ => Some(left_hit),
+        if ray.direction[self.axis] >= 0.0 {
+            match self.left.hit(ray, t_range.clone()) {
+                Some(left_hit) => {
+                    let right_hit = self.right.hit(ray, t_range.start..left_hit.t);
+                    match right_hit {
+                        Some(right_hit) => Some(right_hit),
+                        _ => Some(left_hit),
+                    }
+                },
+                _ => {
+                    let right_hit = self.right.hit(ray, t_range);
+                    match right_hit {
+                        Some(right_hit) => Some(right_hit),
+                        _ => None,
+                    }
                 }
-            },
-            _ => {
-                let right_hit = self.right.hit(ray, t_range);
-                match right_hit {
-                    Some(right_hit) => Some(right_hit),
-                    _ => None,
+            }
+        } else{
+            match self.right.hit(ray, t_range.clone()) {
+                Some(right_hit) => {
+                    let left_hit = self.left.hit(ray, t_range.start..right_hit.t);
+                    match left_hit {
+                        Some(left_hit) => Some(left_hit),
+                        _ => Some(right_hit),
+                    }
+                },
+                _ => {
+                    let left_hit = self.left.hit(ray, t_range);
+                    match left_hit {
+                        Some(left_hit) => Some(left_hit),
+                        _ => None,
+                    }
                 }
             }
         }

@@ -29,7 +29,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let default_view_model = ViewModel {
         cx: 800,
         cy: 800,
-        repetitions_threads: 7,
+        repetitions_threads: 2,
         repetitions: 10000,
         samples: 10,
     };
