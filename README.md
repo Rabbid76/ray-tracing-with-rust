@@ -49,6 +49,8 @@ Dielectric
 
 ![dielectric 3](rendering/MaterialDielectric3_800x400_10000_samples.png)
 
+![dielectric 4](rendering/MaterialDielectric4_2000x1000_10000_samples.png)
+
 Diffuse light
 
 ![diffuse light 1](rendering/LightDiffuse1_800x400_10000_samples.png)
