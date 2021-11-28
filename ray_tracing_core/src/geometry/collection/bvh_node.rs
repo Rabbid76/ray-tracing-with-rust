@@ -98,20 +98,23 @@ impl Geometry for BVHNode {
             }
             None => (),
         }
-        let left_hit = self.left.hit(ray, t_range.clone());
-        let right_hit = self.right.hit(ray, t_range);
 
-        match (left_hit, right_hit) {
-            (Some(left_hit), Some(right_hit)) => {
-                if left_hit.t < right_hit.t {
-                    Some(left_hit)
-                } else {
-                    Some(right_hit)
+        // TODO: test the "nearer" leaf first
+        match self.left.hit(ray, t_range.clone()) {
+            Some(left_hit) => {
+                let right_hit = self.right.hit(ray, t_range.start..left_hit.t);
+                match right_hit {
+                    Some(right_hit) => Some(right_hit),
+                    _ => Some(left_hit),
+                }
+            },
+            _ => {
+                let right_hit = self.right.hit(ray, t_range);
+                match right_hit {
+                    Some(right_hit) => Some(right_hit),
+                    _ => None,
                 }
             }
-            (Some(left_hit), _) => Some(left_hit),
-            (_, Some(right_hit)) => Some(right_hit),
-            (_, _) => None,
         }
     }
 
