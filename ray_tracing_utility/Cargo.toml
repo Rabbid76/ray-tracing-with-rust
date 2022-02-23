@@ -2,7 +2,7 @@
 name = "ray_tracing_utility"
 version = "0.1.1"
 authors = ["Rabbid76 <Gernot.Steinegger@gmail.com>"]
-edition = "2018"
+edition = "2021"
 description = "Ray Tracing based on Peter Shirley's mini books"
 license = "MIT OR Apache-2.0"
 
@@ -17,4 +17,4 @@ ray_tracing_core = { path = "../ray_tracing_core" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
-image = "0.23.14"
+image = "0.24.1"

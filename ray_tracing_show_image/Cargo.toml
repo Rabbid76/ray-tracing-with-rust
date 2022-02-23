@@ -2,14 +2,14 @@
 name = "ray_tracing_show_image"
 version = "0.1.1"
 authors = ["Rabbid76 <Gernot.Steinegger@gmail.com>"]
-edition = "2018"
+edition = "2021"
 description = "Ray Tracing based on Peter Shirley's mini books"
 license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-show-image = "0.9.4"
+show-image = "0.9.5"
 
 # How to use a local unpublished crate?
 # https://stackoverflow.com/questions/33025887/how-to-use-a-local-unpublished-crate

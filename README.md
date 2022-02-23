@@ -2,9 +2,6 @@
 
 # Rust Ray Tracing
 
-“Note that I avoid most “modern features” of C++, but inheritance and operator overloading are too useful for ray tracers to pass on.”  
-― [Peter Shirley](https://research.nvidia.com/person/peter-shirley), [Ray Tracing in One Weekend](https://www.goodreads.com/book/show/28794030-ray-tracing-in-one-weekend)
-
 Implemented with [Rust Programming Language](https://www.rust-lang.org/), based on [Peter Shirley's](https://research.nvidia.com/person/peter-shirley) books:
 
 - ["Ray Tracing in One Weekend (Ray Tracing Minibooks Book 1)"](https://raytracing.github.io/books/RayTracingInOneWeekend.html)

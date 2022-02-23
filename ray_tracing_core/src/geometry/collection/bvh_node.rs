@@ -109,7 +109,7 @@ impl Geometry for BVHNode {
                         Some(right_hit) => Some(right_hit),
                         _ => Some(left_hit),
                     }
-                },
+                }
                 _ => {
                     let right_hit = self.right.hit(ray, t_range);
                     match right_hit {
@@ -118,7 +118,7 @@ impl Geometry for BVHNode {
                     }
                 }
             }
-        } else{
+        } else {
             match self.right.hit(ray, t_range.clone()) {
                 Some(right_hit) => {
                     let left_hit = self.left.hit(ray, t_range.start..right_hit.t);
@@ -126,7 +126,7 @@ impl Geometry for BVHNode {
                         Some(left_hit) => Some(left_hit),
                         _ => Some(right_hit),
                     }
-                },
+                }
                 _ => {
                     let left_hit = self.left.hit(ray, t_range);
                     match left_hit {
