@@ -21,6 +21,7 @@ The CSG rendering library [http://www.opencsg.org/]
 
 ### Scenes
 
+![](pkxLT.png)
 ...
 
 ### Serializer values
