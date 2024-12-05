@@ -43,7 +43,7 @@ impl Texture for CheckerTexture {
     }
 
     fn has_alpha(&self) -> bool {
-        self.odd_texture.has_alpha() || self.odd_texture.has_alpha()
+        self.even_texture.has_alpha() || self.odd_texture.has_alpha()
     }
 
     fn accept(&self, visitor: &mut dyn Visitor) -> Result<(), Box<dyn Error>> {
